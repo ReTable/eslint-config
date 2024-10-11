@@ -1,8 +1,7 @@
 import javascriptPlugin from '@eslint/js';
-import unicornPlugin from 'eslint-plugin-unicorn';
 
 import { buildConfigs, mergeGlobals } from './helpers';
-import { javascript as prettierRules } from './prettier';
+import { javascript as prettier } from './prettier';
 import type {
   Config,
   ECMAVersion,
@@ -13,6 +12,7 @@ import type {
   Rules,
   SourceType,
 } from './types';
+import { unicorn } from './unicorn';
 
 type Options = {
   name: string;
@@ -60,24 +60,12 @@ export function javascript({
 
       rules: javascriptPlugin.configs.recommended.rules,
     },
-    {
-      name: 'unicorn',
-
-      plugins: {
-        unicorn: unicornPlugin,
-      },
-
-      rules: unicornPlugin.configs.recommended.rules,
-    },
+    unicorn,
     {
       name: 'user-rules',
 
       rules,
     },
-    {
-      name: 'prettier',
-
-      rules: prettierRules,
-    },
+    prettier,
   ]);
 }
