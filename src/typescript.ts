@@ -1,8 +1,7 @@
 import javascriptPlugin from '@eslint/js';
-import unicornPlugin from 'eslint-plugin-unicorn';
 
-import { mergeGlobals } from '~/helpers';
-import { typescript as prettierRules } from '~/prettier';
+import { buildConfigs, mergeGlobals } from '~/helpers';
+import { typescript as prettier } from '~/prettier';
 import type {
   Config,
   ECMAVersion,
@@ -13,6 +12,7 @@ import type {
   Rules,
   SourceType,
 } from '~/types';
+import { unicorn } from '~/unicorn';
 
 type Options = {
   name: string;
@@ -38,7 +38,7 @@ export function typescript({
   name,
   rules,
   sourceType,
-}: Options): Config {
+}: Options): Config[] {
   const languageOptions: LanguageOptions = {
     ecmaVersion,
 
@@ -49,26 +49,23 @@ export function typescript({
     languageOptions.globals = mergeGlobals(userGlobals);
   }
 
-  return {
-    name,
+  return buildConfigs({ name, files, ignores }, [
+    {
+      name: 'language',
 
-    files,
-
-    ignores,
-
-    languageOptions,
-
-    plugins: {
-      unicorn: unicornPlugin,
+      languageOptions,
     },
+    {
+      name: 'javascript/recommended',
 
-    rules: {
-      ...javascriptPlugin.configs.recommended.rules,
-      ...unicornPlugin.configs.recommended.rules,
-
-      ...rules,
-
-      ...prettierRules,
+      rules: javascriptPlugin.configs.recommended.rules,
     },
-  };
+    unicorn,
+    {
+      name: 'user-rules',
+
+      rules,
+    },
+    prettier,
+  ]);
 }

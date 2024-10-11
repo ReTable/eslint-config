@@ -56,7 +56,7 @@ export function javascript({
       languageOptions,
     },
     {
-      name: 'recommended',
+      name: 'javascript/recommended',
 
       rules: javascriptPlugin.configs.recommended.rules,
     },
