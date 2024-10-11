@@ -43,6 +43,12 @@ export function react({ files, globals, ignores, jsxRuntime, name, rules }: Opti
 
     languageOptions,
 
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+
     plugins: {
       react: reactPlugin as Plugin,
       'react-hooks': reactHooksPlugin,
