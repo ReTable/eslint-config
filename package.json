@@ -47,7 +47,8 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-testing-library": "^6.2.2",
-    "eslint-plugin-unicorn": "^54.0.0"
+    "eslint-plugin-unicorn": "^54.0.0",
+    "globals": "^15.11.0"
   },
   "peerDependencies": {
     "eslint": "^9.12.0",
