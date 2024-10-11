@@ -1,4 +1,4 @@
-import { Rules } from '../types';
+import type { Rules } from '~/types';
 
 export function filterRulesByName(rules: Rules, filter: (name: string) => boolean): Rules {
   const all: Rules = {};

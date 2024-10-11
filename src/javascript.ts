@@ -1,7 +1,7 @@
 import javascriptPlugin from '@eslint/js';
 
-import { buildConfigs, mergeGlobals } from './helpers';
-import { javascript as prettier } from './prettier';
+import { buildConfigs, mergeGlobals } from '~/helpers';
+import { javascript as prettier } from '~/prettier';
 import type {
   Config,
   ECMAVersion,
@@ -11,8 +11,8 @@ import type {
   LanguageOptions,
   Rules,
   SourceType,
-} from './types';
-import { unicorn } from './unicorn';
+} from '~/types';
+import { unicorn } from '~/unicorn';
 
 type Options = {
   name: string;

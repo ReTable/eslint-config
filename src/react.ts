@@ -3,8 +3,8 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import { browser } from 'globals';
 
-import { react as prettierRules } from './prettier';
-import type { Config, Files, Ignores, LanguageOptions, Plugin, Rules } from './types';
+import { react as prettierRules } from '~/prettier';
+import type { Config, Files, Ignores, LanguageOptions, Plugin, Rules } from '~/types';
 
 type Options = {
   name: string;

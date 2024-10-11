@@ -1,4 +1,4 @@
-import type { Config, Files, Ignores } from '../types';
+import type { Config, Files, Ignores } from '~/types';
 
 type Options = {
   name: string;

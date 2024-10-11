@@ -1,6 +1,6 @@
 import vitestPlugin from '@vitest/eslint-plugin';
 
-import type { Config, Files, Ignores, Rules } from './types';
+import type { Config, Files, Ignores, Rules } from '~/types';
 
 type Options = {
   name: string;

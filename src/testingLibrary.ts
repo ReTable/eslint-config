@@ -1,7 +1,7 @@
 import { fixupPluginRules } from '@eslint/compat';
 import testingLibraryPlugin from 'eslint-plugin-testing-library';
 
-import { Config, type Files, type Ignores, type Rules } from './types';
+import type { Config, Files, Ignores, Rules } from '~/types';
 
 type Options = {
   name: string;

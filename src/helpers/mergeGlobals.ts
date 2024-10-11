@@ -1,4 +1,4 @@
-import { Globals, GlobalsConfig } from '../types';
+import type { Globals, GlobalsConfig } from '~/types';
 
 export function mergeGlobals(userGlobals: Globals[]): GlobalsConfig {
   const all: Globals = {};
