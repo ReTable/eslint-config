@@ -1,4 +1,4 @@
-import { configs } from '@eslint/js';
+import javascriptPlugin from '@eslint/js';
 
 import { mergeGlobals } from './helpers';
 import type {
@@ -57,7 +57,7 @@ export function javascript({
     languageOptions,
 
     rules: {
-      ...configs.recommended.rules,
+      ...javascriptPlugin.configs.recommended.rules,
 
       ...rules,
     },
