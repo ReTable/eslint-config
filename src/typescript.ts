@@ -1,15 +1,15 @@
-import { configs } from '@eslint/js';
+import { configs as javascriptConfigs } from '@eslint/js';
 
 import { mergeGlobals } from './helpers';
-import type {
+import {
   Config,
-  ECMAVersion,
-  Files,
-  Globals,
-  Ignores,
+  type ECMAVersion,
+  type Files,
+  type Globals,
+  type Ignores,
   LanguageOptions,
-  Rules,
-  SourceType,
+  type Rules,
+  type SourceType,
 } from './types';
 
 type Options = {
@@ -28,7 +28,7 @@ type Options = {
   rules?: Rules;
 };
 
-export function javascript({
+export function typescript({
   ecmaVersion,
   files,
   globals: userGlobals,
@@ -57,7 +57,7 @@ export function javascript({
     languageOptions,
 
     rules: {
-      ...configs.recommended.rules,
+      ...javascriptConfigs.recommended.rules,
 
       ...rules,
     },
