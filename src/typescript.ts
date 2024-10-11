@@ -1,4 +1,5 @@
 import javascriptPlugin from '@eslint/js';
+import unicornPlugin from 'eslint-plugin-unicorn';
 
 import { mergeGlobals } from './helpers';
 import type {
@@ -56,8 +57,13 @@ export function typescript({
 
     languageOptions,
 
+    plugins: {
+      unicorn: unicornPlugin,
+    },
+
     rules: {
       ...javascriptPlugin.configs.recommended.rules,
+      ...unicornPlugin.configs.recommended.rules,
 
       ...rules,
     },
