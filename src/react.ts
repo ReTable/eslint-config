@@ -4,6 +4,7 @@ import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import { browser } from 'globals';
 
 import { react as prettier } from '~/common/prettier';
+import { user } from '~/common/user';
 import { buildConfigs } from '~/helpers';
 import type { Config, Files, Ignores, LanguageOptions, Plugin, Rules } from '~/types';
 
@@ -79,11 +80,7 @@ export function react({
 
       rules: a11yPlugin.flatConfigs.strict.rules,
     },
-    rules != null && {
-      name: 'user-rules',
-
-      rules: rules,
-    },
+    user(rules),
     prettier,
   ]);
 }

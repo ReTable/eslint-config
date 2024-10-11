@@ -2,6 +2,7 @@ import javascriptPlugin from '@eslint/js';
 
 import { javascript as prettier } from '~/common/prettier';
 import { unicorn } from '~/common/unicorn';
+import { user } from '~/common/user';
 import { buildConfigs, mergeGlobals } from '~/helpers';
 import type {
   Config,
@@ -61,11 +62,7 @@ export function javascript({
       rules: javascriptPlugin.configs.recommended.rules,
     },
     unicorn,
-    rules != null && {
-      name: 'user-rules',
-
-      rules,
-    },
+    user(rules),
     prettier,
   ]);
 }
