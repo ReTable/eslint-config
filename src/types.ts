@@ -1,4 +1,4 @@
-import type { Linter } from 'eslint';
+import type { ESLint, Linter } from 'eslint';
 import type globals from 'globals';
 
 export type Config = Linter.Config;
@@ -14,6 +14,8 @@ export type GlobalsConfig = LanguageOptions['globals'];
 export type Ignores = NonNullable<Linter.Config['ignores']>;
 
 export type LanguageOptions = Linter.LanguageOptions;
+
+export type Plugin = ESLint.Plugin;
 
 export type Rules = Linter.RulesRecord;
 
