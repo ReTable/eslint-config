@@ -1,15 +1,15 @@
 import { configs as javascriptConfigs } from '@eslint/js';
 
 import { mergeGlobals } from './helpers';
-import {
+import type {
   Config,
-  type ECMAVersion,
-  type Files,
-  type Globals,
-  type Ignores,
+  ECMAVersion,
+  Files,
+  Globals,
+  Ignores,
   LanguageOptions,
-  type Rules,
-  type SourceType,
+  Rules,
+  SourceType,
 } from './types';
 
 type Options = {
