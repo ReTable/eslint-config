@@ -3,7 +3,8 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import { browser } from 'globals';
 
-import { react as prettierRules } from '~/prettier';
+import { buildConfigs } from '~/helpers';
+import { react as prettier } from '~/prettier';
 import type { Config, Files, Ignores, LanguageOptions, Plugin, Rules } from '~/types';
 
 type Options = {
@@ -20,48 +21,69 @@ type Options = {
   rules?: Rules;
 };
 
-export function react({ files, globals, ignores, jsxRuntime, name, rules }: Options): Config {
+export function react({
+  files,
+  globals,
+  ignores,
+  jsxRuntime = false,
+  name,
+  rules,
+}: Options): Config[] {
   const languageOptions: LanguageOptions = reactPlugin.configs.flat.recommended.languageOptions;
 
   if (globals) {
     languageOptions.globals = browser;
   }
 
-  const allRules: Rules = Object.assign({}, reactPlugin.configs.flat.recommended.rules as Rules);
+  return buildConfigs({ name, files, ignores }, [
+    {
+      name: 'language',
 
-  if (jsxRuntime) {
-    Object.assign(allRules, reactPlugin.configs.flat['jsx-runtime'].rules);
-  }
+      languageOptions,
+    },
+    {
+      name: 'react',
 
-  Object.assign(
-    allRules,
-    reactHooksPlugin.configs.recommended.rules,
-    a11yPlugin.flatConfigs.strict.rules,
-    rules,
-    prettierRules,
-  );
-
-  return {
-    name,
-
-    files,
-
-    ignores,
-
-    languageOptions,
-
-    settings: {
-      react: {
-        version: 'detect',
+      plugins: {
+        react: reactPlugin as Plugin,
       },
-    },
 
-    plugins: {
-      'jsx-a11y': a11yPlugin,
-      react: reactPlugin as Plugin,
-      'react-hooks': reactHooksPlugin,
-    },
+      settings: {
+        react: {
+          version: 'detect',
+        },
+      },
 
-    rules,
-  };
+      rules: reactPlugin.configs.flat.recommended.rules as Rules,
+    },
+    jsxRuntime && {
+      name: 'jsx-runtime',
+
+      rules: reactPlugin.configs.flat['jsx-runtime'].rules as Rules,
+    },
+    {
+      name: 'react-hooks',
+
+      plugins: {
+        'react-hooks': reactHooksPlugin,
+      },
+
+      rules: reactHooksPlugin.configs.recommended.rules,
+    },
+    {
+      name: 'a11y',
+
+      plugins: {
+        'jsx-a11y': a11yPlugin,
+      },
+
+      rules: a11yPlugin.flatConfigs.strict.rules,
+    },
+    rules != null && {
+      name: 'user-rules',
+
+      rules: rules,
+    },
+    prettier,
+  ]);
 }

@@ -1,6 +1,5 @@
 import { rules } from 'eslint-plugin-prettier';
 
-import { filterRulesByName } from '~/helpers';
 import type { Config, Rules } from '~/types';
 
 export function buildConfig(allRules: Rules, filter: (name: string) => boolean): Config {
@@ -28,4 +27,4 @@ export const typescript = buildConfig(
     name.startsWith('unicorn/') || name.startsWith('@typescript-eslint/') || !name.includes('/'),
 );
 
-export const react = filterRulesByName(rules, (name) => name.startsWith('react/'));
+export const react = buildConfig(rules, (name) => name.startsWith('react/'));
