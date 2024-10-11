@@ -1,6 +1,6 @@
 import type { Globals, GlobalsConfig } from '~/types';
 
-export function mergeGlobals(userGlobals: Globals[]): GlobalsConfig {
+export function mergeGlobals(userGlobals: Array<Globals>): GlobalsConfig {
   const all: Globals = {};
 
   for (const nsOrConfig of userGlobals) {

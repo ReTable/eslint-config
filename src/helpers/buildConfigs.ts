@@ -8,14 +8,19 @@ type Options = {
   ignores?: Ignores;
 };
 
-export function buildConfigs({ name: ns, files, ignores }: Options, configs: Config[]): Config[] {
-  return configs.map(({ name, ...config }) => ({
-    ...config,
+export function buildConfigs(
+  { name: ns, files, ignores }: Options,
+  configs: Array<Config | boolean>,
+): Array<Config> {
+  return configs
+    .filter((it) => typeof it !== 'boolean')
+    .map(({ name, ...config }) => ({
+      ...config,
 
-    name: `${ns}/${name}`,
+      name: `${ns}/${name}`,
 
-    files,
+      files,
 
-    ignores,
-  }));
+      ignores,
+    }));
 }

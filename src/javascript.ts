@@ -21,7 +21,7 @@ type Options = {
 
   ignores?: Ignores;
 
-  globals?: Globals[];
+  globals?: Array<Globals>;
 
   ecmaVersion?: ECMAVersion;
 
@@ -61,7 +61,7 @@ export function javascript({
       rules: javascriptPlugin.configs.recommended.rules,
     },
     unicorn,
-    {
+    rules != null && {
       name: 'user-rules',
 
       rules,
