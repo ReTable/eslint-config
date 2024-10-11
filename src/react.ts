@@ -1,3 +1,4 @@
+import a11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import { browser } from 'globals';
@@ -32,7 +33,13 @@ export function react({ files, globals, ignores, jsxRuntime, name, rules }: Opti
     Object.assign(allRules, reactPlugin.configs.flat['jsx-runtime'].rules);
   }
 
-  Object.assign(allRules, reactHooksPlugin.configs.recommended.rules, rules, prettierRules);
+  Object.assign(
+    allRules,
+    reactHooksPlugin.configs.recommended.rules,
+    a11yPlugin.flatConfigs.strict.rules,
+    rules,
+    prettierRules,
+  );
 
   return {
     name,
@@ -50,6 +57,7 @@ export function react({ files, globals, ignores, jsxRuntime, name, rules }: Opti
     },
 
     plugins: {
+      'jsx-a11y': a11yPlugin,
       react: reactPlugin as Plugin,
       'react-hooks': reactHooksPlugin,
     },
