@@ -2,6 +2,7 @@ import javascriptPlugin from '@eslint/js';
 import unicornPlugin from 'eslint-plugin-unicorn';
 
 import { mergeGlobals } from './helpers';
+import { javascript as prettierRules } from './prettier';
 import type {
   Config,
   ECMAVersion,
@@ -66,6 +67,8 @@ export function javascript({
       ...unicornPlugin.configs.recommended.rules,
 
       ...rules,
+
+      ...prettierRules,
     },
   };
 }

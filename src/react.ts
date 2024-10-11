@@ -2,6 +2,7 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import { browser } from 'globals';
 
+import { react as prettierRules } from './prettier';
 import type { Config, Files, Ignores, LanguageOptions, Plugin, Rules } from './types';
 
 type Options = {
@@ -31,9 +32,7 @@ export function react({ files, globals, ignores, jsxRuntime, name, rules }: Opti
     Object.assign(allRules, reactPlugin.configs.flat['jsx-runtime'].rules);
   }
 
-  Object.assign(allRules, reactHooksPlugin.configs.recommended.rules);
-
-  Object.assign(allRules, rules);
+  Object.assign(allRules, reactHooksPlugin.configs.recommended.rules, rules, prettierRules);
 
   return {
     name,
