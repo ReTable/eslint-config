@@ -1,7 +1,16 @@
 import { configs } from '@eslint/js';
-import { browser, node } from 'globals';
+import globals from 'globals';
 
-import type { Config, Files, Globals, Ignores, LanguageOptions, SourceType } from './types';
+import type {
+  Config,
+  ECMAVersion,
+  Files,
+  Globals,
+  Ignores,
+  LanguageOptions,
+  Rules,
+  SourceType,
+} from './types';
 
 type Options = {
   name: string;
@@ -10,28 +19,37 @@ type Options = {
 
   ignores?: Ignores;
 
-  globals?: Globals;
+  globals?: Globals[];
+
+  ecmaVersion?: ECMAVersion;
 
   sourceType?: SourceType;
+
+  rules?: Rules;
 };
 
-export function javascript({ name, files, ignores, globals, sourceType }: Options): Config {
+export function javascript({
+  ecmaVersion,
+  files,
+  globals: userGlobals,
+  ignores,
+  name,
+  rules,
+  sourceType,
+}: Options): Config {
   const languageOptions: LanguageOptions = {
-    ecmaVersion: 'latest',
+    ecmaVersion,
 
-    sourceType: sourceType,
+    sourceType,
   };
 
-  switch (globals) {
-    case 'browser': {
-      languageOptions.globals = browser;
+  if (userGlobals != null) {
+    languageOptions.globals = {};
 
-      break;
-    }
-    case 'node': {
-      languageOptions.globals = node;
+    for (const nsOrConfig of userGlobals) {
+      const target = typeof nsOrConfig === 'string' ? globals[nsOrConfig] : nsOrConfig;
 
-      break;
+      languageOptions.globals = Object.assign(languageOptions.globals, target);
     }
   }
 
@@ -44,6 +62,10 @@ export function javascript({ name, files, ignores, globals, sourceType }: Option
 
     languageOptions,
 
-    rules: configs.recommended.rules,
+    rules: {
+      ...configs.recommended.rules,
+
+      ...rules,
+    },
   };
 }
