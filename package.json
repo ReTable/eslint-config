@@ -21,14 +21,13 @@
     "eslint",
     "preset"
   ],
-  "homepage": "https://github.com/ReTable/ui-kit/tree/main/configs/eslint-config#readme",
+  "homepage": "https://github.com/ReTable/eslint-config/tree/main#readme",
   "bugs": {
-    "url": "https://github.com/ReTable/ui-kit/issues"
+    "url": "https://github.com/ReTable/eslint-config/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ReTable/ui-kit.git",
-    "directory": "configs/eslint-config"
+    "url": "https://github.com/ReTable/eslint-config.git"
   },
   "author": "Retable Inc.",
   "license": "ISC",
