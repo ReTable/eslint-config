@@ -3,8 +3,8 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import { browser } from 'globals';
 
+import { react as prettier } from '~/common/prettier';
 import { buildConfigs } from '~/helpers';
-import { react as prettier } from '~/prettier';
 import type { Config, Files, Ignores, LanguageOptions, Plugin, Rules } from '~/types';
 
 type Options = {

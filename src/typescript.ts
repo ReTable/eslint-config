@@ -1,7 +1,8 @@
 import javascriptPlugin from '@eslint/js';
 
+import { typescript as prettier } from '~/common/prettier';
+import { unicorn } from '~/common/unicorn';
 import { buildConfigs, mergeGlobals } from '~/helpers';
-import { typescript as prettier } from '~/prettier';
 import type {
   Config,
   ECMAVersion,
@@ -12,7 +13,6 @@ import type {
   Rules,
   SourceType,
 } from '~/types';
-import { unicorn } from '~/unicorn';
 
 type Options = {
   name: string;
