@@ -1,1 +1,1 @@
-export {};
+export { javascript } from './javascript';
