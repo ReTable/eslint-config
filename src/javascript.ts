@@ -1,7 +1,7 @@
 import javascriptPlugin from '@eslint/js';
 import unicornPlugin from 'eslint-plugin-unicorn';
 
-import { mergeGlobals } from './helpers';
+import { buildConfigs, mergeGlobals } from './helpers';
 import { javascript as prettierRules } from './prettier';
 import type {
   Config,
@@ -38,7 +38,7 @@ export function javascript({
   name,
   rules,
   sourceType,
-}: Options): Config {
+}: Options): Config[] {
   const languageOptions: LanguageOptions = {
     ecmaVersion,
 
@@ -49,26 +49,35 @@ export function javascript({
     languageOptions.globals = mergeGlobals(userGlobals);
   }
 
-  return {
-    name,
+  return buildConfigs({ name, files, ignores }, [
+    {
+      name: 'language',
 
-    files,
-
-    ignores,
-
-    languageOptions,
-
-    plugins: {
-      unicorn: unicornPlugin,
+      languageOptions,
     },
+    {
+      name: 'recommended',
 
-    rules: {
-      ...javascriptPlugin.configs.recommended.rules,
-      ...unicornPlugin.configs.recommended.rules,
-
-      ...rules,
-
-      ...prettierRules,
+      rules: javascriptPlugin.configs.recommended.rules,
     },
-  };
+    {
+      name: 'unicorn',
+
+      plugins: {
+        unicorn: unicornPlugin,
+      },
+
+      rules: unicornPlugin.configs.recommended.rules,
+    },
+    {
+      name: 'user-rules',
+
+      rules,
+    },
+    {
+      name: 'prettier',
+
+      rules: prettierRules,
+    },
+  ]);
 }

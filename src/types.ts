@@ -1,7 +1,7 @@
 import type { ESLint, Linter } from 'eslint';
 import type globals from 'globals';
 
-export type Config = Linter.Config;
+export type Config = Linter.Config & { name: string };
 
 export type ECMAVersion = Linter.EcmaVersion;
 
