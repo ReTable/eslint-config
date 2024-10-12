@@ -9,11 +9,11 @@ export type Files = Linter.Config['files'];
 
 export type Globals = keyof typeof globals | Linter.Globals;
 
-export type GlobalsConfig = LanguageOptions['globals'];
-
 export type Ignores = NonNullable<Linter.Config['ignores']>;
 
 export type LanguageOptions = Linter.LanguageOptions;
+
+export type ParserOptions = Linter.ParserOptions;
 
 export type Plugin = ESLint.Plugin;
 

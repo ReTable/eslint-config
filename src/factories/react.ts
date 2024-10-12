@@ -1,12 +1,12 @@
 import a11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import { browser } from 'globals';
 
+import { language } from '~/common/language';
 import { react as prettier } from '~/common/prettier';
 import { user } from '~/common/user';
 import { buildConfigs } from '~/helpers';
-import type { Config, Files, Ignores, LanguageOptions, Plugin, Rules } from '~/types';
+import type { Config, Files, Ignores, Plugin, Rules } from '~/types';
 
 type Options = {
   name: string;
@@ -30,18 +30,11 @@ export function react({
   name,
   rules,
 }: Options): Config[] {
-  const languageOptions: LanguageOptions = reactPlugin.configs.flat.recommended.languageOptions;
-
-  if (globals) {
-    languageOptions.globals = browser;
-  }
-
   return buildConfigs({ name, files, ignores }, [
-    {
-      name: 'language',
-
-      languageOptions,
-    },
+    language({
+      globals: globals ? ['browser'] : undefined,
+      parserOptions: reactPlugin.configs.flat.recommended.languageOptions.parserOptions,
+    }),
     {
       name: 'react',
 
