@@ -1,4 +1,4 @@
-import vitestPlugin from '@vitest/eslint-plugin';
+import plugin from '@vitest/eslint-plugin';
 
 import type { Config, Files, Ignores, Rules } from '~/types';
 
@@ -21,11 +21,11 @@ export function vitest({ name, files, ignores, rules }: Options): Config {
     ignores,
 
     plugins: {
-      vitest: vitestPlugin,
+      vitest: plugin,
     },
 
     rules: {
-      ...vitestPlugin.configs.recommended.rules,
+      ...plugin.configs.recommended.rules,
 
       ...rules,
     },

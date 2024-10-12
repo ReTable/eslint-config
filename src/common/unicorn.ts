@@ -1,4 +1,4 @@
-import unicornPlugin from 'eslint-plugin-unicorn';
+import plugin from 'eslint-plugin-unicorn';
 
 import type { Config } from '~/types';
 
@@ -6,8 +6,8 @@ export const unicorn: Config = {
   name: 'unicorn',
 
   plugins: {
-    unicorn: unicornPlugin,
+    unicorn: plugin,
   },
 
-  rules: unicornPlugin.configs.recommended.rules,
+  rules: plugin.configs.recommended.rules,
 };

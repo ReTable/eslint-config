@@ -1,4 +1,4 @@
-import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import plugin from 'eslint-plugin-react-hooks';
 
 import { Config } from '~/types';
 
@@ -6,8 +6,8 @@ export const reactHooksConfig: Config = {
   name: 'react-hooks',
 
   plugins: {
-    'react-hooks': reactHooksPlugin,
+    'react-hooks': plugin,
   },
 
-  rules: reactHooksPlugin.configs.recommended.rules,
+  rules: plugin.configs.recommended.rules,
 };

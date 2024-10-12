@@ -1,4 +1,4 @@
-import a11yPlugin from 'eslint-plugin-jsx-a11y';
+import plugin from 'eslint-plugin-jsx-a11y';
 
 import { Config } from '~/types';
 
@@ -6,8 +6,8 @@ export const a11yConfig: Config = {
   name: 'a11y',
 
   plugins: {
-    'jsx-a11y': a11yPlugin,
+    'jsx-a11y': plugin,
   },
 
-  rules: a11yPlugin.flatConfigs.strict.rules,
+  rules: plugin.flatConfigs.strict.rules,
 };

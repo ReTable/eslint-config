@@ -1,4 +1,4 @@
-import reactPlugin from 'eslint-plugin-react';
+import plugin from 'eslint-plugin-react';
 
 import { language } from '~/common/language';
 import type { Config, Plugin, Rules } from '~/types';
@@ -10,8 +10,7 @@ type Options = {
 };
 
 export function reactConfigs({ globals, jsxRuntime }: Options): Array<Config> {
-  const { ['jsx-runtime']: jsxRuntimeConfig, recommended: recommendedConfig } =
-    reactPlugin.configs.flat;
+  const { ['jsx-runtime']: jsxRuntimeConfig, recommended: recommendedConfig } = plugin.configs.flat;
 
   const configs: Array<Config> = [
     language({
@@ -22,7 +21,7 @@ export function reactConfigs({ globals, jsxRuntime }: Options): Array<Config> {
       name: 'react',
 
       plugins: {
-        react: reactPlugin as Plugin,
+        react: plugin as Plugin,
       },
 
       settings: {

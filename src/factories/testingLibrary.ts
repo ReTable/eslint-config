@@ -1,5 +1,5 @@
 import { fixupPluginRules } from '@eslint/compat';
-import testingLibraryPlugin from 'eslint-plugin-testing-library';
+import plugin from 'eslint-plugin-testing-library';
 
 import type { Config, Files, Ignores, Rules } from '~/types';
 
@@ -22,11 +22,11 @@ export function testingLibrary({ name, files, ignores, rules }: Options): Config
     ignores,
 
     plugins: {
-      'testing-library': fixupPluginRules(testingLibraryPlugin),
+      'testing-library': fixupPluginRules(plugin),
     },
 
     rules: {
-      ...testingLibraryPlugin.configs['flat/react'].rules,
+      ...plugin.configs['flat/react'].rules,
 
       ...rules,
     },
