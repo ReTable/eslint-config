@@ -1,3 +1,5 @@
+import typescriptPlugin from 'typescript-eslint';
+
 import { javascript as recommended } from '~/common/javascript';
 import { language } from '~/common/language';
 import { typescript as prettier } from '~/common/prettier';
@@ -36,6 +38,8 @@ export function typescript({
   return buildConfigs({ name, files, ignores }, [
     language({ ecmaVersion, globals, sourceType }),
     recommended,
+    ...(typescriptPlugin.configs.strict as Array<Config>),
+    ...(typescriptPlugin.configs.stylistic as Array<Config>),
     unicorn,
     user(rules),
     prettier,
