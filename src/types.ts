@@ -1,5 +1,6 @@
-import type { ESLint, Linter } from 'eslint';
-import type globals from 'globals';
+import { ESLint, Linter } from 'eslint';
+
+import globals from 'globals';
 
 export type Config = Linter.Config & { name: string };
 

@@ -3,7 +3,9 @@ import { language } from '~/common/language';
 import { typescript as prettier } from '~/common/prettier';
 import { unicorn } from '~/common/unicorn';
 import { user } from '~/common/user';
+
 import { buildConfigs } from '~/helpers';
+
 import type { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '~/types';
 
 type Options = {

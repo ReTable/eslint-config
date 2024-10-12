@@ -1,8 +1,11 @@
 import { fixupPluginRules } from '@eslint/compat';
+
 import plugin from 'eslint-plugin-testing-library';
 
 import { user } from '~/common/user';
+
 import { buildConfigs } from '~/helpers';
+
 import type { Config, Files, Ignores, Rules } from '~/types';
 
 type Options = {
