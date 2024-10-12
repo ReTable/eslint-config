@@ -1,5 +1,7 @@
 import plugin from '@vitest/eslint-plugin';
 
+import { user } from '~/common/user';
+import { buildConfigs } from '~/helpers';
 import type { Config, Files, Ignores, Rules } from '~/types';
 
 type Options = {
@@ -12,22 +14,17 @@ type Options = {
   rules?: Rules;
 };
 
-export function vitest({ name, files, ignores, rules }: Options): Config {
-  return {
-    name,
+export function vitest({ name, files, ignores, rules }: Options): Array<Config> {
+  return buildConfigs({ name, files, ignores }, [
+    {
+      name: 'vitest',
 
-    files,
+      plugins: {
+        vitest: plugin,
+      },
 
-    ignores,
-
-    plugins: {
-      vitest: plugin,
+      rules: plugin.configs.recommended.rules,
     },
-
-    rules: {
-      ...plugin.configs.recommended.rules,
-
-      ...rules,
-    },
-  };
+    user(rules),
+  ]);
 }

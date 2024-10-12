@@ -26,7 +26,7 @@ export function react({
   jsxRuntime = false,
   name,
   rules,
-}: Options): Config[] {
+}: Options): Array<Config> {
   return buildConfigs({ name, files, ignores }, [
     ...reactConfigs({ globals, jsxRuntime }),
     reactHooksConfig,

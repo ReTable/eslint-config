@@ -30,7 +30,7 @@ export function javascript({
   name,
   rules,
   sourceType,
-}: Options): Config[] {
+}: Options): Array<Config> {
   return buildConfigs({ name, files, ignores }, [
     language({ ecmaVersion, globals, sourceType }),
     recommended,

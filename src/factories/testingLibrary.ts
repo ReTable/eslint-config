@@ -1,6 +1,8 @@
 import { fixupPluginRules } from '@eslint/compat';
 import plugin from 'eslint-plugin-testing-library';
 
+import { user } from '~/common/user';
+import { buildConfigs } from '~/helpers';
 import type { Config, Files, Ignores, Rules } from '~/types';
 
 type Options = {
@@ -13,22 +15,17 @@ type Options = {
   rules?: Rules;
 };
 
-export function testingLibrary({ name, files, ignores, rules }: Options): Config {
-  return {
-    name,
+export function testingLibrary({ name, files, ignores, rules }: Options): Array<Config> {
+  return buildConfigs({ name, files, ignores }, [
+    {
+      name: 'testing-library',
 
-    files,
+      plugins: {
+        'testing-library': fixupPluginRules(plugin),
+      },
 
-    ignores,
-
-    plugins: {
-      'testing-library': fixupPluginRules(plugin),
+      rules: plugin.configs['flat/react'].rules,
     },
-
-    rules: {
-      ...plugin.configs['flat/react'].rules,
-
-      ...rules,
-    },
-  };
+    user(rules),
+  ]);
 }
