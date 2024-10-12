@@ -1,5 +1,4 @@
-import javascriptPlugin from '@eslint/js';
-
+import { javascript as recommended } from '~/common/javascript';
 import { language } from '~/common/language';
 import { typescript as prettier } from '~/common/prettier';
 import { unicorn } from '~/common/unicorn';
@@ -34,11 +33,7 @@ export function typescript({
 }: Options): Config[] {
   return buildConfigs({ name, files, ignores }, [
     language({ ecmaVersion, globals, sourceType }),
-    {
-      name: 'javascript/recommended',
-
-      rules: javascriptPlugin.configs.recommended.rules,
-    },
+    recommended,
     unicorn,
     user(rules),
     prettier,
