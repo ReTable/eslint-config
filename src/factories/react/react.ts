@@ -1,4 +1,4 @@
-import { a11yConfig, reactConfigs, reactHooksConfig } from './configs';
+import { a11yConfig, reactConfigs } from './configs';
 
 import { react as prettier } from '~/common/prettier';
 import { user } from '~/common/user';
@@ -31,7 +31,6 @@ export function react({
 }: Options): Array<Config> {
   return buildConfigs({ name, files, ignores }, [
     ...reactConfigs({ globals, jsxRuntime }),
-    reactHooksConfig,
     a11yConfig,
     user(rules),
     prettier,
