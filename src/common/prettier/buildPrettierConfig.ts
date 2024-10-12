@@ -1,4 +1,4 @@
-import plugin from 'eslint-plugin-prettier';
+import plugin from 'eslint-config-prettier';
 
 import type { Config, Rules } from '~/types';
 
