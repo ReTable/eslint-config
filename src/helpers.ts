@@ -14,13 +14,20 @@ export function buildConfigs(
 ): Array<Config> {
   return configs
     .filter((it) => typeof it !== 'boolean')
-    .map(({ name, ...config }) => ({
-      ...config,
+    .map(({ name, ...config }) => {
+      const final: Config = {
+        ...config,
 
-      name: `${ns}/${name}`,
+        name: `${ns}/${name}`,
 
-      files,
+        files,
+      };
 
-      ignores,
-    }));
+      // NOTE: The `eslint` throws an error if `ignores` key are presented, but it equals to `undefined`.
+      if (ignores != null) {
+        final.ignores = ignores;
+      }
+
+      return final;
+    });
 }
