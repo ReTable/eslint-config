@@ -1,3 +1,5 @@
+import globals from 'globals';
+
 import type {
   Config,
   ECMAVersion,
@@ -35,7 +37,7 @@ export function language({
     const all: Globals = {};
 
     for (const nsOrConfig of userGlobals) {
-      const target = typeof nsOrConfig === 'object' ? nsOrConfig : nsOrConfig;
+      const target = typeof nsOrConfig === 'object' ? nsOrConfig : globals[nsOrConfig];
 
       Object.assign(all, target);
     }
