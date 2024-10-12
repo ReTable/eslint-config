@@ -2,6 +2,7 @@
   "name": "@tabula/eslint-config",
   "version": "0.1.5",
   "description": "Configuration for the ESLint",
+  "type": "module",
   "exports": {
     ".": {
       "types": "./typings/index.d.ts",
