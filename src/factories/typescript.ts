@@ -1,11 +1,10 @@
 import { ConfigWithExtends, configs as typescriptConfigs } from 'typescript-eslint';
 
-import { eslint as recommended } from '../common/eslint';
 import { TypescriptOptions as ImportXOptions, typescript as importX } from '../common/import-x';
 import { language } from '../common/language';
 import { typescript as prettier } from '../common/prettier';
-import { unicorn } from '../common/unicorn';
 import { user } from '../common/user';
+import { eslint, unicorn } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
 
@@ -42,7 +41,7 @@ export function typescript({
 }: Options): Array<Config> {
   const configs: Array<Config> = [
     language({ ecmaVersion, globals, sourceType, parserOptions: tsParserOptions }),
-    recommended,
+    ...eslint(),
   ];
 
   if (useTyped) {
@@ -61,7 +60,7 @@ export function typescript({
     configs.push(...importX(importXOptions));
   }
 
-  configs.push(unicorn);
+  configs.push(...unicorn());
 
   if (areRulesPresented(rules)) {
     configs.push(user(rules));
