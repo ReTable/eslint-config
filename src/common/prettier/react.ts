@@ -1,3 +1,3 @@
 import { buildPrettierConfig } from './buildPrettierConfig';
 
-export const react = buildPrettierConfig((name) => name.startsWith('react/'));
+export const react = buildPrettierConfig('react', (name) => name.startsWith('react/'));

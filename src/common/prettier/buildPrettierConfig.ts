@@ -2,7 +2,7 @@ import plugin from 'eslint-config-prettier';
 
 import type { Config, Rules } from '~/types';
 
-export function buildPrettierConfig(filter: (name: string) => boolean): Config {
+export function buildPrettierConfig(name: string, filter: (name: string) => boolean): Config {
   const rules: Rules = {};
 
   for (const [name, rule] of Object.entries(plugin.rules)) {
@@ -13,5 +13,5 @@ export function buildPrettierConfig(filter: (name: string) => boolean): Config {
     rules[name] = rule;
   }
 
-  return { name: 'prettier', rules };
+  return { name: `prettier/${name}`, rules };
 }

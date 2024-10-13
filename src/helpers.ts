@@ -1,7 +1,7 @@
 import type { Config, ECMAVersion, Files, Ignores, Rules, SourceType } from '~/types';
 
 type BuildConfigsOptions = {
-  name: string;
+  name?: string;
 
   files: Files;
 
@@ -15,10 +15,18 @@ export function buildConfigs(
   return configs
     .filter((it) => typeof it !== 'boolean')
     .map(({ name, ...config }) => {
+      const fullName: Array<string> = [];
+
+      if (ns != null && ns.length > 0) {
+        fullName.push(ns);
+      }
+
+      fullName.push(name != null && name.length > 0 ? name : 'unnamed');
+
       const final: Config = {
         ...config,
 
-        name: `${ns}/${name}`,
+        name: fullName.join('/'),
 
         files,
       };

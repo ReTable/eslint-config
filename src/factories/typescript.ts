@@ -1,7 +1,7 @@
 import { ConfigWithExtends, configs as typescriptConfigs } from 'typescript-eslint';
 
+import { eslint as recommended } from '~/common/eslint';
 import { TypescriptOptions as ImportXOptions, typescript as importX } from '~/common/import-x';
-import { javascript as recommended } from '~/common/javascript';
 import { language } from '~/common/language';
 import { typescript as prettier } from '~/common/prettier';
 import { unicorn } from '~/common/unicorn';

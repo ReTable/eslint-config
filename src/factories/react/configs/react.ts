@@ -19,7 +19,7 @@ export function reactConfigs({ globals, jsxRuntime }: Options): Array<Config> {
       parserOptions: recommendedConfig.languageOptions.parserOptions,
     }),
     {
-      name: 'react',
+      name: 'react/recommended',
 
       plugins: {
         react: plugin as Plugin,
@@ -37,7 +37,7 @@ export function reactConfigs({ globals, jsxRuntime }: Options): Array<Config> {
 
   if (jsxRuntime) {
     configs.push({
-      name: 'jsx-runtime',
+      name: 'react/jsx-runtime',
 
       rules: jsxRuntimeConfig.rules as Rules,
     });

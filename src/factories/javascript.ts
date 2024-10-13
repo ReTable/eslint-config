@@ -1,5 +1,5 @@
+import { eslint as recommended } from '~/common/eslint';
 import { JavascriptOptions as ImportXOptions, javascript as importX } from '~/common/import-x';
-import { javascript as recommended } from '~/common/javascript';
 import { language } from '~/common/language';
 import { javascript as prettier } from '~/common/prettier';
 import { unicorn } from '~/common/unicorn';

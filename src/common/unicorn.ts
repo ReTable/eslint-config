@@ -3,7 +3,7 @@ import plugin from 'eslint-plugin-unicorn';
 import type { Config } from '~/types';
 
 export const unicorn: Config = {
-  name: 'unicorn',
+  name: 'unicorn/recommended',
 
   plugins: {
     unicorn: plugin,
