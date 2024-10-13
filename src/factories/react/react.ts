@@ -1,8 +1,9 @@
 import { react as prettier } from '../../common/prettier';
 import { user } from '../../common/user';
+import { jsxA11y } from '../../configs';
 import { areRulesPresented, buildConfigs } from '../../helpers';
 import { Config, FactoryOptions, Rules } from '../../types';
-import { a11yConfig, reactConfigs } from './configs';
+import { reactConfigs } from './configs';
 
 type Options = FactoryOptions & {
   jsxRuntime?: boolean;
@@ -13,7 +14,7 @@ type Options = FactoryOptions & {
 };
 
 export function react({ globals, jsxRuntime = false, rules, ...options }: Options): Array<Config> {
-  const configs: Array<Config> = [...reactConfigs({ globals, jsxRuntime }), a11yConfig];
+  const configs: Array<Config> = [...reactConfigs({ globals, jsxRuntime }), ...jsxA11y()];
 
   if (areRulesPresented(rules)) {
     configs.push(user(rules));
