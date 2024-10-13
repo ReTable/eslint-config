@@ -7,8 +7,8 @@ This package provides ESLint configurators as shared configs.
 We use recommended rules from the following packages:
 
 - [eslint](https://eslint.org/)
-- [@typescript-eslint](https://typescript-eslint.io/)
-- [import](https://github.com/import-js/eslint-plugin-import)
+- [typescript-eslint](https://typescript-eslint.io/)
+- [import-x](https://github.com/un-ts/eslint-plugin-import-x)
 - [unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
 - [prettier](https://github.com/prettier/eslint-config-prettier)
 
@@ -17,6 +17,11 @@ We add support of React for browser:
 - [react](https://github.com/jsx-eslint/eslint-plugin-react)
 - [react-hook](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)
 - [jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
+
+We add support of testing tools:
+
+- [vitest](https://github.com/vitest-dev/eslint-plugin-vitest#readme)
+- [testing-library](https://github.com/testing-library/eslint-plugin-testing-library)
 
 Also, we add our opinionated rules configuration on top of it.
 
