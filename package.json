@@ -36,6 +36,11 @@
     "build": "forge",
     "build:watch": "forge --watch"
   },
+  "packageManager": "pnpm@9.12.1",
+  "engines": {
+    "node": ">20",
+    "pnpm": "^9"
+  },
   "dependencies": {
     "@eslint/compat": "^1.2.0",
     "@eslint/js": "^9.12.0",
