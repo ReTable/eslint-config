@@ -1,0 +1,21 @@
+name: 'Install Node.js'
+description: 'Installs Node.js, pnpm and dependencies'
+
+runs:
+  using: composite
+
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        run_install: false
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        cache: pnpm
+        node-version-file: .tool-versions
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
