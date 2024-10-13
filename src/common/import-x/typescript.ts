@@ -1,7 +1,8 @@
-import { Config } from '../../types';
-import { Options, settingsOf } from './settingsOf';
 import { TsResolverOptions } from 'eslint-import-resolver-typescript';
 import { flatConfigs } from 'eslint-plugin-import-x';
+
+import { Config } from '../../types';
+import { Options, settingsOf } from './settingsOf';
 
 type ResolverOptions = Pick<TsResolverOptions, 'alwaysTryTypes' | 'project'>;
 

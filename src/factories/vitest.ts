@@ -1,7 +1,8 @@
+import plugin from '@vitest/eslint-plugin';
+
 import { user } from '../common/user';
 import { areRulesPresented, buildConfigs } from '../helpers';
 import type { Config, Files, Ignores, Rules } from '../types';
-import plugin from '@vitest/eslint-plugin';
 
 type Options = {
   name?: string;

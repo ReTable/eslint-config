@@ -1,9 +1,10 @@
 import { fixupPluginRules } from '@eslint/compat';
 
+import plugin from 'eslint-plugin-testing-library';
+
 import { user } from '../common/user';
 import { areRulesPresented, buildConfigs } from '../helpers';
 import type { Config, Files, Ignores, Rules } from '../types';
-import plugin from 'eslint-plugin-testing-library';
 
 type Options = {
   name?: string;

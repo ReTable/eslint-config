@@ -1,3 +1,5 @@
+import { ConfigWithExtends, configs as typescriptConfigs } from 'typescript-eslint';
+
 import { eslint as recommended } from '../common/eslint';
 import { TypescriptOptions as ImportXOptions, typescript as importX } from '../common/import-x';
 import { language } from '../common/language';
@@ -6,7 +8,6 @@ import { unicorn } from '../common/unicorn';
 import { user } from '../common/user';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '../types';
-import { ConfigWithExtends, configs as typescriptConfigs } from 'typescript-eslint';
 
 export type TypescriptParserOptions = Pick<
   NonNullable<NonNullable<ConfigWithExtends['languageOptions']>['parserOptions']>,

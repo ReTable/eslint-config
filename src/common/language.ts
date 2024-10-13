@@ -1,3 +1,5 @@
+import globals from 'globals';
+
 import type {
   Config,
   ECMAVersion,
@@ -6,7 +8,6 @@ import type {
   ParserOptions,
   SourceType,
 } from '../types';
-import globals from 'globals';
 
 type Options = {
   ecmaVersion?: ECMAVersion;

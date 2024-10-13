@@ -1,6 +1,7 @@
+import plugin from 'eslint-plugin-react';
+
 import { language } from '../../../common/language';
 import type { Config, Plugin, Rules } from '../../../types';
-import plugin from 'eslint-plugin-react';
 
 type Options = {
   jsxRuntime?: boolean;
