@@ -1,6 +1,5 @@
-import { react as prettier } from '../../common/prettier';
 import { user } from '../../common/user';
-import { jsxA11y } from '../../configs';
+import { jsxA11y, prettier } from '../../configs';
 import { areRulesPresented, buildConfigs } from '../../helpers';
 import { Config, FactoryOptions, Rules } from '../../types';
 import { reactConfigs } from './configs';
@@ -20,7 +19,7 @@ export function react({ globals, jsxRuntime = false, rules, ...options }: Option
     configs.push(user(rules));
   }
 
-  configs.push(prettier);
+  configs.push(...prettier());
 
   return buildConfigs(options, configs);
 }

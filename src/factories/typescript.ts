@@ -2,9 +2,8 @@ import { ConfigWithExtends, configs as typescriptConfigs } from 'typescript-esli
 
 import { TypescriptOptions as ImportXOptions, typescript as importX } from '../common/import-x';
 import { language } from '../common/language';
-import { typescript as prettier } from '../common/prettier';
 import { user } from '../common/user';
-import { eslint, unicorn } from '../configs';
+import { eslint, prettier, unicorn } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
 
@@ -66,7 +65,7 @@ export function typescript({
     configs.push(user(rules));
   }
 
-  configs.push(prettier);
+  configs.push(...prettier());
 
   return buildConfigs(options, configs);
 }

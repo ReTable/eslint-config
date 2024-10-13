@@ -1,8 +1,7 @@
 import { JavascriptOptions as ImportXOptions, javascript as importX } from '../common/import-x';
 import { language } from '../common/language';
-import { javascript as prettier } from '../common/prettier';
 import { user } from '../common/user';
-import { eslint, unicorn } from '../configs';
+import { eslint, prettier, unicorn } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
 
@@ -40,7 +39,7 @@ export function javascript({
     configs.push(user(rules));
   }
 
-  configs.push(prettier);
+  configs.push(...prettier());
 
   return buildConfigs(options, configs);
 }
