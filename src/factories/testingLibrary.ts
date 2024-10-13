@@ -1,8 +1,5 @@
-import { fixupPluginRules } from '@eslint/compat';
-
-import plugin from 'eslint-plugin-testing-library';
-
 import { user } from '../common/user';
+import { testingLibrary as baseConfigs } from '../configs';
 import { areRulesPresented, buildConfigs } from '../helpers';
 import { Config, FactoryOptions, Rules } from '../types';
 
@@ -11,17 +8,7 @@ type Options = FactoryOptions & {
 };
 
 export function testingLibrary({ rules, ...options }: Options): Array<Config> {
-  const configs: Array<Config> = [
-    {
-      name: 'testing-library/react',
-
-      plugins: {
-        'testing-library': fixupPluginRules(plugin),
-      },
-
-      rules: plugin.configs['flat/react'].rules,
-    },
-  ];
+  const configs: Array<Config> = baseConfigs('react');
 
   if (areRulesPresented(rules)) {
     configs.push(user(rules));
