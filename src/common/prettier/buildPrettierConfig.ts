@@ -1,11 +1,10 @@
-import plugin from 'eslint-config-prettier';
-
-import type { Config, Rules } from '~/types';
+import type { Config, Rules } from '../../types';
+import { rules as allRules } from 'eslint-config-prettier';
 
 export function buildPrettierConfig(name: string, filter: (name: string) => boolean): Config {
   const rules: Rules = {};
 
-  for (const [name, rule] of Object.entries(plugin.rules)) {
+  for (const [name, rule] of Object.entries(allRules)) {
     if (!filter(name)) {
       continue;
     }

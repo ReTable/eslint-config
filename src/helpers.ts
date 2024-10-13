@@ -1,4 +1,4 @@
-import type { Config, ECMAVersion, Files, Ignores, Rules, SourceType } from '~/types';
+import type { Config, ECMAVersion, Files, Ignores, Rules, SourceType } from './types';
 
 type BuildConfigsOptions = {
   name?: string;

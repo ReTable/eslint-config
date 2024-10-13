@@ -1,16 +1,14 @@
-import { eslint as recommended } from '~/common/eslint';
-import { JavascriptOptions as ImportXOptions, javascript as importX } from '~/common/import-x';
-import { language } from '~/common/language';
-import { javascript as prettier } from '~/common/prettier';
-import { unicorn } from '~/common/unicorn';
-import { user } from '~/common/user';
-
-import { areModulesAvailable, areRulesPresented, buildConfigs } from '~/helpers';
-
-import type { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '~/types';
+import { eslint as recommended } from '../common/eslint';
+import { JavascriptOptions as ImportXOptions, javascript as importX } from '../common/import-x';
+import { language } from '../common/language';
+import { javascript as prettier } from '../common/prettier';
+import { unicorn } from '../common/unicorn';
+import { user } from '../common/user';
+import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
+import type { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '../types';
 
 type Options = {
-  name: string;
+  name?: string;
 
   files: Files;
 

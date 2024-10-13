@@ -1,14 +1,11 @@
+import { react as prettier } from '../../common/prettier';
+import { user } from '../../common/user';
+import { areRulesPresented, buildConfigs } from '../../helpers';
+import type { Config, Files, Ignores, Rules } from '../../types';
 import { a11yConfig, reactConfigs } from './configs';
 
-import { react as prettier } from '~/common/prettier';
-import { user } from '~/common/user';
-
-import { areRulesPresented, buildConfigs } from '~/helpers';
-
-import type { Config, Files, Ignores, Rules } from '~/types';
-
 type Options = {
-  name: string;
+  name?: string;
 
   files: Files;
 

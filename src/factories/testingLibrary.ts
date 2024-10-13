@@ -1,15 +1,12 @@
 import { fixupPluginRules } from '@eslint/compat';
 
+import { user } from '../common/user';
+import { areRulesPresented, buildConfigs } from '../helpers';
+import type { Config, Files, Ignores, Rules } from '../types';
 import plugin from 'eslint-plugin-testing-library';
 
-import { user } from '~/common/user';
-
-import { areRulesPresented, buildConfigs } from '~/helpers';
-
-import type { Config, Files, Ignores, Rules } from '~/types';
-
 type Options = {
-  name: string;
+  name?: string;
 
   files: Files;
 

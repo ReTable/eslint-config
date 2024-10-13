@@ -1,6 +1,6 @@
 import plugin from '@eslint/js';
 
-import { Config } from '~/types';
+import { Config } from '../types';
 
 export const eslint: Config = {
   name: 'eslint/recommended',

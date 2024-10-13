@@ -1,11 +1,9 @@
+import { buildConfigs } from '../helpers';
+import type { Config, Files, Ignores } from '../types';
 import plugin from 'eslint-plugin-react-hooks';
 
-import { buildConfigs } from '~/helpers';
-
-import type { Config, Files, Ignores } from '~/types';
-
 type Options = {
-  name: string;
+  name?: string;
 
   files: Files;
 

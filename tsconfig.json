@@ -1,11 +1,5 @@
 {
   "extends": "@tabula/typescript-config/tsconfig.node.json",
 
-  "compilerOptions": {
-    "paths": {
-      "~/*": ["./src/*"]
-    }
-  },
-
   "include": ["src", "types"]
 }
