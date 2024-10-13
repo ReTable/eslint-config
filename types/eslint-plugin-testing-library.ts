@@ -4,6 +4,9 @@ declare module 'eslint-plugin-testing-library' {
 
   const plugin: FixupPluginDefinition & {
     configs: {
+      'flat/dom': {
+        rules: Linter.RulesRecord;
+      };
       'flat/react': {
         rules: Linter.RulesRecord;
       };
