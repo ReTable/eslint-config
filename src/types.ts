@@ -6,11 +6,11 @@ export type Config = Linter.Config & { name: string };
 
 export type ECMAVersion = Linter.EcmaVersion;
 
-export type Files = Linter.Config['files'];
+export type Files = Array<string>;
 
 export type Globals = keyof typeof globals | Linter.Globals;
 
-export type Ignores = NonNullable<Linter.Config['ignores']>;
+export type Ignores = Array<string>;
 
 export type LanguageOptions = Linter.LanguageOptions;
 
@@ -19,5 +19,7 @@ export type ParserOptions = Linter.ParserOptions;
 export type Plugin = ESLint.Plugin;
 
 export type Rules = Linter.RulesRecord;
+
+export type Settings = Record<string, unknown>;
 
 export type SourceType = Linter.SourceType;

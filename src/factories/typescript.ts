@@ -1,26 +1,20 @@
-import typescriptPlugin, { ConfigWithExtends } from 'typescript-eslint';
+import { ConfigWithExtends, configs as typescriptConfigs } from 'typescript-eslint';
 
+import { TypescriptOptions as ImportXOptions, typescript as importX } from '~/common/import-x';
 import { javascript as recommended } from '~/common/javascript';
 import { language } from '~/common/language';
 import { typescript as prettier } from '~/common/prettier';
 import { unicorn } from '~/common/unicorn';
 import { user } from '~/common/user';
 
-import { buildConfigs } from '~/helpers';
+import { areModulesAvailable, areRulesPresented, buildConfigs } from '~/helpers';
 
-import type { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '~/types';
+import { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '~/types';
 
-type ParserOptions = NonNullable<
-  NonNullable<ConfigWithExtends['languageOptions']>['parserOptions']
+export type TypescriptParserOptions = Pick<
+  NonNullable<NonNullable<ConfigWithExtends['languageOptions']>['parserOptions']>,
+  'project' | 'projectService' | 'projectFolderIgnoreList' | 'tsconfigRootDir'
 >;
-
-type Project = ParserOptions['project'];
-
-type ProjectService = ParserOptions['projectService'];
-
-type ProjectFolderIgnoreList = ParserOptions['projectFolderIgnoreList'];
-
-type TsConfigRootDir = ParserOptions['tsconfigRootDir'];
 
 type Options = {
   name: string;
@@ -37,58 +31,53 @@ type Options = {
 
   rules?: Rules;
 
-  project?: Project;
-  projectService?: ProjectService;
-  projectFolderIgnoreList?: ProjectFolderIgnoreList;
-  tsconfigRootDir?: TsConfigRootDir;
+  useTyped?: boolean;
+
+  tsParserOptions?: TypescriptParserOptions;
+
+  importXOptions?: ImportXOptions;
 };
 
 export function typescript({
+  importXOptions,
   ecmaVersion,
   files,
   globals,
   ignores,
   name,
-  project,
-  projectFolderIgnoreList,
-  projectService,
   rules,
   sourceType,
-  tsconfigRootDir,
+  tsParserOptions,
+  useTyped,
 }: Options): Array<Config> {
-  const parserOptions: ParserOptions = {};
+  const configs: Array<Config> = [
+    language({ ecmaVersion, globals, sourceType, parserOptions: tsParserOptions }),
+    recommended,
+  ];
 
-  let isTyped = false;
-
-  if (project != null) {
-    parserOptions.project = project;
-
-    if (tsconfigRootDir != null) {
-      parserOptions.tsconfigRootDir = tsconfigRootDir;
-    }
-
-    if (projectFolderIgnoreList != null) {
-      parserOptions.projectFolderIgnoreList = projectFolderIgnoreList;
-    }
-
-    isTyped = true;
-  } else if (projectService != null) {
-    parserOptions.projectService = projectService;
-
-    isTyped = true;
+  if (useTyped) {
+    configs.push(
+      ...(typescriptConfigs.strictTypeChecked as Array<Config>),
+      ...(typescriptConfigs.stylisticTypeChecked as Array<Config>),
+    );
+  } else {
+    configs.push(
+      ...(typescriptConfigs.strict as Array<Config>),
+      ...(typescriptConfigs.stylistic as Array<Config>),
+    );
   }
 
-  const [strict, stylistic] = isTyped
-    ? [typescriptPlugin.configs.strictTypeChecked, typescriptPlugin.configs.stylisticTypeChecked]
-    : [typescriptPlugin.configs.strict, typescriptPlugin.configs.stylistic];
+  if (areModulesAvailable(ecmaVersion, sourceType)) {
+    configs.push(...importX(importXOptions));
+  }
 
-  return buildConfigs({ name, files, ignores }, [
-    language({ ecmaVersion, globals, sourceType, parserOptions }),
-    recommended,
-    ...(strict as Array<Config>),
-    ...(stylistic as Array<Config>),
-    unicorn,
-    user(rules),
-    prettier,
-  ]);
+  configs.push(unicorn);
+
+  if (areRulesPresented(rules)) {
+    configs.push(user(rules));
+  }
+
+  configs.push(prettier);
+
+  return buildConfigs({ name, files, ignores }, configs);
 }

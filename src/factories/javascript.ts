@@ -1,10 +1,11 @@
+import { JavascriptOptions as ImportXOptions, javascript as importX } from '~/common/import-x';
 import { javascript as recommended } from '~/common/javascript';
 import { language } from '~/common/language';
 import { javascript as prettier } from '~/common/prettier';
 import { unicorn } from '~/common/unicorn';
 import { user } from '~/common/user';
 
-import { buildConfigs } from '~/helpers';
+import { areModulesAvailable, areRulesPresented, buildConfigs } from '~/helpers';
 
 import type { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '~/types';
 
@@ -22,6 +23,8 @@ type Options = {
   sourceType?: SourceType;
 
   rules?: Rules;
+
+  importXOptions?: ImportXOptions;
 };
 
 export function javascript({
@@ -29,15 +32,26 @@ export function javascript({
   files,
   globals,
   ignores,
+  importXOptions,
   name,
   rules,
   sourceType,
 }: Options): Array<Config> {
-  return buildConfigs({ name, files, ignores }, [
+  const configs: Array<Config> = [
     language({ ecmaVersion, globals, sourceType }),
     recommended,
     unicorn,
-    user(rules),
-    prettier,
-  ]);
+  ];
+
+  if (areModulesAvailable(ecmaVersion, sourceType)) {
+    configs.push(...importX(importXOptions));
+  }
+
+  if (areRulesPresented(rules)) {
+    configs.push(user(rules));
+  }
+
+  configs.push(prettier);
+
+  return buildConfigs({ name, files, ignores }, configs);
 }

@@ -3,7 +3,7 @@ import { a11yConfig, reactConfigs } from './configs';
 import { react as prettier } from '~/common/prettier';
 import { user } from '~/common/user';
 
-import { buildConfigs } from '~/helpers';
+import { areRulesPresented, buildConfigs } from '~/helpers';
 
 import type { Config, Files, Ignores, Rules } from '~/types';
 
@@ -32,7 +32,7 @@ export function react({
   return buildConfigs({ name, files, ignores }, [
     ...reactConfigs({ globals, jsxRuntime }),
     a11yConfig,
-    user(rules),
+    areRulesPresented(rules) ? user(rules) : false,
     prettier,
   ]);
 }

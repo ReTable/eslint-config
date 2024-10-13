@@ -2,7 +2,7 @@ import plugin from '@vitest/eslint-plugin';
 
 import { user } from '~/common/user';
 
-import { buildConfigs } from '~/helpers';
+import { areRulesPresented, buildConfigs } from '~/helpers';
 
 import type { Config, Files, Ignores, Rules } from '~/types';
 
@@ -27,6 +27,6 @@ export function vitest({ name, files, ignores, rules }: Options): Array<Config> 
 
       rules: plugin.configs.recommended.rules,
     },
-    user(rules),
+    areRulesPresented(rules) ? user(rules) : false,
   ]);
 }

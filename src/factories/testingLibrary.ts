@@ -4,7 +4,7 @@ import plugin from 'eslint-plugin-testing-library';
 
 import { user } from '~/common/user';
 
-import { buildConfigs } from '~/helpers';
+import { areRulesPresented, buildConfigs } from '~/helpers';
 
 import type { Config, Files, Ignores, Rules } from '~/types';
 
@@ -29,6 +29,6 @@ export function testingLibrary({ name, files, ignores, rules }: Options): Array<
 
       rules: plugin.configs['flat/react'].rules,
     },
-    user(rules),
+    areRulesPresented(rules) ? user(rules) : false,
   ]);
 }

@@ -1,6 +1,6 @@
-import type { Config, Files, Ignores } from '~/types';
+import type { Config, ECMAVersion, Files, Ignores, Rules, SourceType } from '~/types';
 
-type Options = {
+type BuildConfigsOptions = {
   name: string;
 
   files: Files;
@@ -9,7 +9,7 @@ type Options = {
 };
 
 export function buildConfigs(
-  { name: ns, files, ignores }: Options,
+  { name: ns, files, ignores }: BuildConfigsOptions,
   configs: Array<Config | boolean>,
 ): Array<Config> {
   return configs
@@ -30,4 +30,15 @@ export function buildConfigs(
 
       return final;
     });
+}
+
+export function areModulesAvailable(ecmaVersion?: ECMAVersion, sourceType?: SourceType): boolean {
+  return (
+    (ecmaVersion == null || ecmaVersion === 'latest' || ecmaVersion >= 2018) &&
+    (sourceType == null || sourceType === 'module')
+  );
+}
+
+export function areRulesPresented(rules?: Rules): rules is Rules {
+  return rules != null && Object.keys(rules).length > 0;
 }
