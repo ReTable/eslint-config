@@ -10,10 +10,10 @@ type Options = FactoryOptions & {
   rules?: Rules;
 };
 
-export function testingLibrary({ name, files, ignores, rules }: Options): Array<Config> {
-  return buildConfigs({ name, files, ignores }, [
+export function testingLibrary({ rules, ...options }: Options): Array<Config> {
+  const configs: Array<Config> = [
     {
-      name: 'testing-library',
+      name: 'testing-library/react',
 
       plugins: {
         'testing-library': fixupPluginRules(plugin),
@@ -21,6 +21,11 @@ export function testingLibrary({ name, files, ignores, rules }: Options): Array<
 
       rules: plugin.configs['flat/react'].rules,
     },
-    areRulesPresented(rules) ? user(rules) : false,
-  ]);
+  ];
+
+  if (areRulesPresented(rules)) {
+    configs.push(user(rules));
+  }
+
+  return buildConfigs(options, configs);
 }

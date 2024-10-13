@@ -21,13 +21,11 @@ type Options = FactoryOptions & {
 
 export function javascript({
   ecmaVersion,
-  files,
   globals,
-  ignores,
   importXOptions,
-  name,
   rules,
   sourceType,
+  ...options
 }: Options): Array<Config> {
   const configs: Array<Config> = [
     language({ ecmaVersion, globals, sourceType }),
@@ -45,5 +43,5 @@ export function javascript({
 
   configs.push(prettier);
 
-  return buildConfigs({ name, files, ignores }, configs);
+  return buildConfigs(options, configs);
 }

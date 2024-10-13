@@ -33,14 +33,12 @@ type Options = FactoryOptions & {
 export function typescript({
   importXOptions,
   ecmaVersion,
-  files,
   globals,
-  ignores,
-  name,
   rules,
   sourceType,
   tsParserOptions,
   useTyped,
+  ...options
 }: Options): Array<Config> {
   const configs: Array<Config> = [
     language({ ecmaVersion, globals, sourceType, parserOptions: tsParserOptions }),
@@ -71,5 +69,5 @@ export function typescript({
 
   configs.push(prettier);
 
-  return buildConfigs({ name, files, ignores }, configs);
+  return buildConfigs(options, configs);
 }

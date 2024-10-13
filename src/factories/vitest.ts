@@ -8,8 +8,8 @@ type Options = FactoryOptions & {
   rules?: Rules;
 };
 
-export function vitest({ name, files, ignores, rules }: Options): Array<Config> {
-  return buildConfigs({ name, files, ignores }, [
+export function vitest({ rules, ...options }: Options): Array<Config> {
+  const configs: Array<Config> = [
     {
       name: 'vitest',
 
@@ -19,6 +19,11 @@ export function vitest({ name, files, ignores, rules }: Options): Array<Config> 
 
       rules: plugin.configs.recommended.rules,
     },
-    areRulesPresented(rules) ? user(rules) : false,
-  ]);
+  ];
+
+  if (areRulesPresented(rules)) {
+    configs.push(user(rules));
+  }
+
+  return buildConfigs(options, configs);
 }

@@ -2,34 +2,32 @@ import { Config, ECMAVersion, FactoryOptions, Rules, SourceType } from './types'
 
 export function buildConfigs(
   { name: ns, files, ignores }: FactoryOptions,
-  configs: Array<Config | boolean>,
+  configs: Array<Config>,
 ): Array<Config> {
-  return configs
-    .filter((it) => typeof it !== 'boolean')
-    .map(({ name, ...config }) => {
-      const fullName: Array<string> = [];
+  return configs.map(({ name, ...config }) => {
+    const fullName: Array<string> = [];
 
-      if (ns != null && ns.length > 0) {
-        fullName.push(ns);
-      }
+    if (ns != null && ns.length > 0) {
+      fullName.push(ns);
+    }
 
-      fullName.push(name != null && name.length > 0 ? name : 'unnamed');
+    fullName.push(name != null && name.length > 0 ? name : 'unnamed');
 
-      const final: Config = {
-        ...config,
+    const final: Config = {
+      ...config,
 
-        name: fullName.join('/'),
+      name: fullName.join('/'),
 
-        files,
-      };
+      files,
+    };
 
-      // NOTE: The `eslint` throws an error if `ignores` key are presented, but it equals to `undefined`.
-      if (ignores != null) {
-        final.ignores = ignores;
-      }
+    // NOTE: The `eslint` throws an error if `ignores` key are presented, but it equals to `undefined`.
+    if (ignores != null) {
+      final.ignores = ignores;
+    }
 
-      return final;
-    });
+    return final;
+  });
 }
 
 export function areModulesAvailable(ecmaVersion?: ECMAVersion, sourceType?: SourceType): boolean {

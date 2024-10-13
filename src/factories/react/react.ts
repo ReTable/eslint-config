@@ -12,18 +12,14 @@ type Options = FactoryOptions & {
   rules?: Rules;
 };
 
-export function react({
-  files,
-  globals,
-  ignores,
-  jsxRuntime = false,
-  name,
-  rules,
-}: Options): Array<Config> {
-  return buildConfigs({ name, files, ignores }, [
-    ...reactConfigs({ globals, jsxRuntime }),
-    a11yConfig,
-    areRulesPresented(rules) ? user(rules) : false,
-    prettier,
-  ]);
+export function react({ globals, jsxRuntime = false, rules, ...options }: Options): Array<Config> {
+  const configs: Array<Config> = [...reactConfigs({ globals, jsxRuntime }), a11yConfig];
+
+  if (areRulesPresented(rules)) {
+    configs.push(user(rules));
+  }
+
+  configs.push(prettier);
+
+  return buildConfigs(options, configs);
 }
