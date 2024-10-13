@@ -1,16 +1,10 @@
 import { react as prettier } from '../../common/prettier';
 import { user } from '../../common/user';
 import { areRulesPresented, buildConfigs } from '../../helpers';
-import type { Config, Files, Ignores, Rules } from '../../types';
+import { Config, FactoryOptions, Rules } from '../../types';
 import { a11yConfig, reactConfigs } from './configs';
 
-type Options = {
-  name?: string;
-
-  files: Files;
-
-  ignores?: Ignores;
-
+type Options = FactoryOptions & {
   jsxRuntime?: boolean;
 
   globals?: boolean;

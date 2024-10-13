@@ -7,20 +7,14 @@ import { typescript as prettier } from '../common/prettier';
 import { unicorn } from '../common/unicorn';
 import { user } from '../common/user';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
-import { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '../types';
+import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
 
 export type TypescriptParserOptions = Pick<
   NonNullable<NonNullable<ConfigWithExtends['languageOptions']>['parserOptions']>,
   'project' | 'projectService' | 'projectFolderIgnoreList' | 'tsconfigRootDir'
 >;
 
-type Options = {
-  name?: string;
-
-  files: Files;
-
-  ignores?: Ignores;
-
+type Options = FactoryOptions & {
   globals?: Array<Globals>;
 
   ecmaVersion?: ECMAVersion;

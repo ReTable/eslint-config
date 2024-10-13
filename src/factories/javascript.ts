@@ -5,15 +5,9 @@ import { javascript as prettier } from '../common/prettier';
 import { unicorn } from '../common/unicorn';
 import { user } from '../common/user';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
-import type { Config, ECMAVersion, Files, Globals, Ignores, Rules, SourceType } from '../types';
+import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
 
-type Options = {
-  name?: string;
-
-  files: Files;
-
-  ignores?: Ignores;
-
+type Options = FactoryOptions & {
   globals?: Array<Globals>;
 
   ecmaVersion?: ECMAVersion;

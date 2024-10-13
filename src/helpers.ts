@@ -1,15 +1,7 @@
-import type { Config, ECMAVersion, Files, Ignores, Rules, SourceType } from './types';
-
-type BuildConfigsOptions = {
-  name?: string;
-
-  files: Files;
-
-  ignores?: Ignores;
-};
+import { Config, ECMAVersion, FactoryOptions, Rules, SourceType } from './types';
 
 export function buildConfigs(
-  { name: ns, files, ignores }: BuildConfigsOptions,
+  { name: ns, files, ignores }: FactoryOptions,
   configs: Array<Config | boolean>,
 ): Array<Config> {
   return configs

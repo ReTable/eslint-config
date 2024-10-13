@@ -6,6 +6,14 @@ export type Config = Linter.Config;
 
 export type ECMAVersion = Linter.EcmaVersion;
 
+export type FactoryOptions = {
+  name?: string;
+
+  files: Files;
+
+  ignores?: Ignores;
+};
+
 export type Files = Array<string>;
 
 export type Globals = keyof typeof globals | Linter.Globals;
