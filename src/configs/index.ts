@@ -4,3 +4,4 @@ export { prettier } from './prettier';
 export { reactHooks } from './reactHooks';
 export { testingLibrary } from './testingLibrary';
 export { unicorn } from './unicorn';
+export { vitest } from './vitest';

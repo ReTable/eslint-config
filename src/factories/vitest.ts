@@ -1,6 +1,5 @@
-import plugin from '@vitest/eslint-plugin';
-
 import { user } from '../common/user';
+import { vitest as baseConfigs } from '../configs';
 import { areRulesPresented, buildConfigs } from '../helpers';
 import { Config, FactoryOptions, Rules } from '../types';
 
@@ -9,17 +8,7 @@ type Options = FactoryOptions & {
 };
 
 export function vitest({ rules, ...options }: Options): Array<Config> {
-  const configs: Array<Config> = [
-    {
-      name: 'vitest',
-
-      plugins: {
-        vitest: plugin,
-      },
-
-      rules: plugin.configs.recommended.rules,
-    },
-  ];
+  const configs: Array<Config> = baseConfigs();
 
   if (areRulesPresented(rules)) {
     configs.push(user(rules));
