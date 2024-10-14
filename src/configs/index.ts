@@ -5,3 +5,6 @@ export { reactHooks } from './reactHooks';
 export { testingLibrary } from './testingLibrary';
 export { unicorn } from './unicorn';
 export { vitest } from './vitest';
+export { react } from './react';
+
+export type { Options as ReactOptions } from './react';
