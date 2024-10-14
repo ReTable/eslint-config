@@ -1,4 +1,4 @@
-import { vitest as baseConfigs } from '../configs';
+import { configs } from '../configs';
 import { areRulesPresented, buildConfigs } from '../helpers';
 import { FactoryOptions, NamedConfig, Rules } from '../types';
 
@@ -7,15 +7,15 @@ type Options = FactoryOptions & {
 };
 
 export function vitest({ rules, ...options }: Options): Array<NamedConfig> {
-  const configs: Array<NamedConfig> = baseConfigs();
+  const result: Array<NamedConfig> = configs.vitest();
 
   if (areRulesPresented(rules)) {
-    configs.push({
+    result.push({
       name: 'user-rules',
 
       rules,
     });
   }
 
-  return buildConfigs(options, configs);
+  return buildConfigs(options, result);
 }

@@ -1,14 +1,4 @@
-import {
-  ImportXOptions,
-  LanguageOptions,
-  TypescriptOptions,
-  typescript as baseConfigs,
-  eslint,
-  importX,
-  language,
-  prettier,
-  unicorn,
-} from '../configs';
+import { ImportXOptions, LanguageOptions, TypescriptOptions, configs } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { FactoryOptions, NamedConfig, Rules } from '../types';
 
@@ -30,27 +20,27 @@ export function typescript({
   useTyped,
   ...options
 }: Options): Array<NamedConfig> {
-  const configs: Array<NamedConfig> = [
-    ...language({ ecmaVersion, globals, sourceType }),
-    ...eslint(),
-    ...baseConfigs({ useTyped, parserOptions }),
+  const result: Array<NamedConfig> = [
+    ...configs.language({ ecmaVersion, globals, sourceType }),
+    ...configs.eslint(),
+    ...configs.typescript({ useTyped, parserOptions }),
   ];
 
   if (areModulesAvailable(ecmaVersion, sourceType)) {
-    configs.push(...importX(importXOptions));
+    result.push(...configs.importX(importXOptions));
   }
 
-  configs.push(...unicorn());
+  result.push(...configs.unicorn());
 
   if (areRulesPresented(rules)) {
-    configs.push({
+    result.push({
       name: 'user-rules',
 
       rules,
     });
   }
 
-  configs.push(...prettier());
+  result.push(...configs.prettier());
 
-  return buildConfigs(options, configs);
+  return buildConfigs(options, result);
 }

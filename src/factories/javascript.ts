@@ -1,12 +1,4 @@
-import {
-  ImportXOptions,
-  LanguageOptions,
-  eslint,
-  importX,
-  language,
-  prettier,
-  unicorn,
-} from '../configs';
+import { ImportXOptions, LanguageOptions, configs } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { FactoryOptions, NamedConfig, Rules } from '../types';
 
@@ -25,25 +17,25 @@ export function javascript({
   sourceType = 'module',
   ...options
 }: Options): Array<NamedConfig> {
-  const configs: Array<NamedConfig> = [
-    ...language({ ecmaVersion, globals, sourceType }),
-    ...eslint(),
-    ...unicorn(),
+  const result: Array<NamedConfig> = [
+    ...configs.language({ ecmaVersion, globals, sourceType }),
+    ...configs.eslint(),
+    ...configs.unicorn(),
   ];
 
   if (areModulesAvailable(ecmaVersion, sourceType)) {
-    configs.push(...importX(importXOptions));
+    result.push(...configs.importX(importXOptions));
   }
 
   if (areRulesPresented(rules)) {
-    configs.push({
+    result.push({
       name: 'user-rules',
 
       rules,
     });
   }
 
-  configs.push(...prettier());
+  result.push(...configs.prettier());
 
-  return buildConfigs(options, configs);
+  return buildConfigs(options, result);
 }
