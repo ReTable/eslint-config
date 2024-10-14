@@ -14,7 +14,7 @@ export function language({
   globals: userGlobals,
   ecmaVersion,
   sourceType,
-}: Options): Array<Config> {
+}: Options = {}): Array<Config> {
   const languageOptions: LanguageOptions = {
     ecmaVersion,
 

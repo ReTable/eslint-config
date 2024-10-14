@@ -8,7 +8,7 @@ export type Options = {
   version?: string;
 };
 
-export function react({ jsxRuntime = true, version = 'detect' }: Options): Array<Config> {
+export function react({ jsxRuntime = true, version = 'detect' }: Options = {}): Array<Config> {
   const { flat: configs } = plugin.configs;
 
   const result: Array<Config> = [
