@@ -6,5 +6,7 @@ export { testingLibrary } from './testingLibrary';
 export { unicorn } from './unicorn';
 export { vitest } from './vitest';
 export { react } from './react';
+export { typescript } from './typescript';
 
 export type { Options as ReactOptions } from './react';
+export type { Options as TypescriptOptions } from './typescript';

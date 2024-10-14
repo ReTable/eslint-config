@@ -1,59 +1,44 @@
-import { ConfigWithExtends, configs as typescriptConfigs } from 'typescript-eslint';
-
 import { TypescriptOptions as ImportXOptions, typescript as importX } from '../common/import-x';
 import { language } from '../common/language';
 import { user } from '../common/user';
-import { eslint, prettier, unicorn } from '../configs';
+import {
+  TypescriptOptions,
+  typescript as baseConfigs,
+  eslint,
+  prettier,
+  unicorn,
+} from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
 
-export type TypescriptParserOptions = Pick<
-  NonNullable<NonNullable<ConfigWithExtends['languageOptions']>['parserOptions']>,
-  'project' | 'projectService' | 'projectFolderIgnoreList' | 'tsconfigRootDir'
->;
+type Options = FactoryOptions &
+  TypescriptOptions & {
+    globals?: Array<Globals>;
 
-type Options = FactoryOptions & {
-  globals?: Array<Globals>;
+    ecmaVersion?: ECMAVersion;
 
-  ecmaVersion?: ECMAVersion;
+    sourceType?: SourceType;
 
-  sourceType?: SourceType;
+    rules?: Rules;
 
-  rules?: Rules;
-
-  useTyped?: boolean;
-
-  tsParserOptions?: TypescriptParserOptions;
-
-  importXOptions?: ImportXOptions;
-};
+    importXOptions?: ImportXOptions;
+  };
 
 export function typescript({
   importXOptions,
-  ecmaVersion,
+  ecmaVersion = 'latest',
   globals,
   rules,
-  sourceType,
-  tsParserOptions,
+  sourceType = 'module',
+  parserOptions,
   useTyped,
   ...options
 }: Options): Array<Config> {
   const configs: Array<Config> = [
-    language({ ecmaVersion, globals, sourceType, parserOptions: tsParserOptions }),
+    language({ ecmaVersion, globals, sourceType }),
     ...eslint(),
+    ...baseConfigs({ useTyped, parserOptions }),
   ];
-
-  if (useTyped) {
-    configs.push(
-      ...(typescriptConfigs.strictTypeChecked as Array<Config>),
-      ...(typescriptConfigs.stylisticTypeChecked as Array<Config>),
-    );
-  } else {
-    configs.push(
-      ...(typescriptConfigs.strict as Array<Config>),
-      ...(typescriptConfigs.stylistic as Array<Config>),
-    );
-  }
 
   if (areModulesAvailable(ecmaVersion, sourceType)) {
     configs.push(...importX(importXOptions));

@@ -18,11 +18,11 @@ type Options = FactoryOptions & {
 };
 
 export function javascript({
-  ecmaVersion,
+  ecmaVersion = 'latest',
   globals,
   importXOptions,
   rules,
-  sourceType,
+  sourceType = 'module',
   ...options
 }: Options): Array<Config> {
   const configs: Array<Config> = [
