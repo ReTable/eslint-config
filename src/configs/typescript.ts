@@ -14,6 +14,30 @@ export type Options = {
   parserOptions?: TypescriptParserOptions;
 };
 
+function cleanup(configs: Array<NamedConfig>): Array<NamedConfig> {
+  const seen = new Set<string>();
+
+  const result: Array<NamedConfig> = [];
+
+  for (const config of configs) {
+    if (seen.has(config.name)) {
+      continue;
+    }
+
+    seen.add(config.name);
+
+    if (!config.name.startsWith('typescript-eslint/')) {
+      result.push(config);
+
+      continue;
+    }
+
+    result.push({ ...config, name: config.name.replace(/^(typescript-eslint\/)/, '') });
+  }
+
+  return result;
+}
+
 export function typescript({ useTyped = true, parserOptions }: Options = {}): Array<NamedConfig> {
   const { strictTypeChecked, stylisticTypeChecked, strict, stylistic } = plugin.configs;
 
@@ -34,14 +58,5 @@ export function typescript({ useTyped = true, parserOptions }: Options = {}): Ar
     });
   }
 
-  return ns(
-    'typescript',
-    configs.map((config) => {
-      if (!config.name.startsWith('typescript-eslint/')) {
-        return config;
-      }
-
-      return { ...config, name: config.name.replace(/^(typescript-eslint\/)/, '') };
-    }),
-  );
+  return ns('typescript', cleanup(configs));
 }
