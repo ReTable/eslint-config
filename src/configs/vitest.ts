@@ -1,10 +1,10 @@
 import plugin from '@vitest/eslint-plugin';
 
+import { defineConfig } from '../helpers';
 import { NamedConfig } from '../types';
-import { ns } from './helpers';
 
 export function vitest(): Array<NamedConfig> {
-  return ns('vitest', [
+  return defineConfig('vitest', [
     {
       ...plugin.configs.recommended,
 

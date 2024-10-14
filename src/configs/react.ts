@@ -1,7 +1,7 @@
 import plugin from 'eslint-plugin-react';
 
+import { defineConfig } from '../helpers';
 import { Config, NamedConfig } from '../types';
-import { ns } from './helpers';
 
 export type Options = {
   jsxRuntime?: boolean;
@@ -34,5 +34,5 @@ export function react({ jsxRuntime = true, version = 'detect' }: Options = {}): 
     });
   }
 
-  return ns('react', result);
+  return defineConfig('react', result);
 }

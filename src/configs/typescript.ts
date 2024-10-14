@@ -1,7 +1,7 @@
 import plugin, { ConfigWithExtends } from 'typescript-eslint';
 
+import { defineConfig } from '../helpers';
 import { NamedConfig } from '../types';
-import { ns } from './helpers';
 
 type TypescriptParserOptions = Pick<
   NonNullable<NonNullable<ConfigWithExtends['languageOptions']>['parserOptions']>,
@@ -58,5 +58,5 @@ export function typescript({ useTyped = true, parserOptions }: Options = {}): Ar
     });
   }
 
-  return ns('typescript', cleanup(configs));
+  return defineConfig('typescript', cleanup(configs));
 }

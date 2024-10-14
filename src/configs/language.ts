@@ -1,7 +1,7 @@
 import globals from 'globals';
 
+import { defineConfig } from '../helpers';
 import type { ECMAVersion, Globals, LanguageOptions, NamedConfig, SourceType } from '../types';
-import { ns } from './helpers';
 
 export type Options = {
   ecmaVersion?: ECMAVersion;
@@ -34,7 +34,7 @@ export function language({
     languageOptions.globals = all;
   }
 
-  return ns('language', [
+  return defineConfig('language', [
     {
       languageOptions,
     },

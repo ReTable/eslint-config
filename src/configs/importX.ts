@@ -1,8 +1,8 @@
 import { TsResolverOptions } from 'eslint-import-resolver-typescript';
 import { flatConfigs } from 'eslint-plugin-import-x';
 
+import { defineConfig } from '../helpers';
 import { Config, NamedConfig, Settings } from '../types';
-import { ns } from './helpers';
 
 type ResolverOptions = Pick<TsResolverOptions, 'alwaysTryTypes' | 'project'>;
 
@@ -94,5 +94,5 @@ export function importX({
     });
   }
 
-  return ns('import-x', result);
+  return defineConfig('import-x', result);
 }
