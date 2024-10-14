@@ -1,24 +1,20 @@
 import { TypescriptOptions as ImportXOptions, typescript as importX } from '../common/import-x';
-import { language } from '../common/language';
 import { user } from '../common/user';
 import {
+  LanguageOptions,
   TypescriptOptions,
   typescript as baseConfigs,
   eslint,
+  language,
   prettier,
   unicorn,
 } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
-import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
+import { Config, FactoryOptions, Rules } from '../types';
 
 type Options = FactoryOptions &
+  LanguageOptions &
   TypescriptOptions & {
-    globals?: Array<Globals>;
-
-    ecmaVersion?: ECMAVersion;
-
-    sourceType?: SourceType;
-
     rules?: Rules;
 
     importXOptions?: ImportXOptions;
@@ -35,7 +31,7 @@ export function typescript({
   ...options
 }: Options): Array<Config> {
   const configs: Array<Config> = [
-    language({ ecmaVersion, globals, sourceType }),
+    ...language({ ecmaVersion, globals, sourceType }),
     ...eslint(),
     ...baseConfigs({ useTyped, parserOptions }),
   ];

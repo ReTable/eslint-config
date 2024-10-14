@@ -4,9 +4,11 @@ import plugin from 'eslint-plugin-testing-library';
 
 import { Config } from '../types';
 
-type Library = 'dom' | 'react';
+export type Options = {
+  library: 'dom' | 'react';
+};
 
-export function testingLibrary(library: Library): Array<Config> {
+export function testingLibrary({ library }: Options): Array<Config> {
   return [
     {
       name: `testing-library/${library}`,
