@@ -1,10 +1,10 @@
 import plugin from 'eslint-plugin-unicorn';
 
+import { defineConfig } from '../helpers';
 import { NamedConfig } from '../types';
-import { ns } from './helpers';
 
 export function unicorn(): Array<NamedConfig> {
-  return ns('unicorn', [
+  return defineConfig('unicorn', [
     {
       ...plugin.configs['flat/recommended'],
 

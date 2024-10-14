@@ -1,34 +1,4 @@
-import { ECMAVersion, FactoryOptions, NamedConfig, Rules, SourceType } from './types';
-
-export function buildConfigs(
-  { name: ns, files, ignores }: FactoryOptions,
-  configs: Array<NamedConfig>,
-): Array<NamedConfig> {
-  return configs.map(({ name, ...config }) => {
-    const fullName: Array<string> = [];
-
-    if (ns != null && ns.length > 0) {
-      fullName.push(ns);
-    }
-
-    fullName.push(name != null && name.length > 0 ? name : 'unnamed');
-
-    const final: NamedConfig = {
-      ...config,
-
-      name: fullName.join('/'),
-
-      files,
-    };
-
-    // NOTE: The `eslint` throws an error if `ignores` key are presented, but it equals to `undefined`.
-    if (ignores != null) {
-      final.ignores = ignores;
-    }
-
-    return final;
-  });
-}
+import { Config, ECMAVersion, NamedConfig, SourceType } from './types';
 
 export function areModulesAvailable(ecmaVersion?: ECMAVersion, sourceType?: SourceType): boolean {
   return (
@@ -37,6 +7,21 @@ export function areModulesAvailable(ecmaVersion?: ECMAVersion, sourceType?: Sour
   );
 }
 
-export function areRulesPresented(rules?: Rules): rules is Rules {
-  return rules != null && Object.keys(rules).length > 0;
+function ns(namespace: string, configs: Array<Config>): Array<NamedConfig> {
+  return configs.map(({ name, ...config }) => ({
+    ...config,
+
+    name: name == null ? namespace : `${namespace}/${name}`,
+  }));
+}
+
+export function defineConfig(namespace: string, configs: Array<Config>): Array<NamedConfig> {
+  return ns(`config:${namespace}`, configs);
+}
+
+export function definePreset(
+  namespace: string,
+  configs: Array<Config | Array<Config>>,
+): Array<NamedConfig> {
+  return ns(`preset:${namespace}`, configs.flat());
 }

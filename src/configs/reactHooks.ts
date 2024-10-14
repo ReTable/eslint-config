@@ -1,10 +1,10 @@
 import plugin from 'eslint-plugin-react-hooks';
 
+import { defineConfig } from '../helpers';
 import { NamedConfig } from '../types';
-import { ns } from './helpers';
 
 export function reactHooks(): Array<NamedConfig> {
-  return ns('react-hooks', [
+  return defineConfig('react-hooks', [
     {
       plugins: {
         'react-hooks': plugin,

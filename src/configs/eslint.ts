@@ -1,10 +1,10 @@
 import plugin from '@eslint/js';
 
+import { defineConfig } from '../helpers';
 import { NamedConfig } from '../types';
-import { ns } from './helpers';
 
 export function eslint(): Array<NamedConfig> {
-  return ns('eslint', [
+  return defineConfig('eslint', [
     {
       name: 'recommended',
 

@@ -2,15 +2,15 @@ import { fixupPluginRules } from '@eslint/compat';
 
 import plugin from 'eslint-plugin-testing-library';
 
+import { defineConfig } from '../helpers';
 import { NamedConfig } from '../types';
-import { ns } from './helpers';
 
 export type Options = {
   library: 'dom' | 'react';
 };
 
 export function testingLibrary({ library }: Options): Array<NamedConfig> {
-  return ns('testing-library', [
+  return defineConfig('testing-library', [
     {
       name: library,
 
