@@ -1,17 +1,16 @@
 import plugin from 'eslint-plugin-react-hooks';
 
-import { Config } from '../types';
+import { NamedConfig } from '../types';
+import { ns } from './helpers';
 
-export function reactHooks(): Array<Config> {
-  return [
+export function reactHooks(): Array<NamedConfig> {
+  return ns('react-hooks', [
     {
-      name: 'react-hooks/recommended',
-
       plugins: {
         'react-hooks': plugin,
       },
 
       rules: plugin.configs.recommended.rules,
     },
-  ];
+  ]);
 }

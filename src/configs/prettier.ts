@@ -1,13 +1,8 @@
 import config from 'eslint-config-prettier';
 
-import { Config } from '../types';
+import { NamedConfig } from '../types';
+import { ns } from './helpers';
 
-export function prettier(): Array<Config> {
-  return [
-    {
-      ...config,
-
-      name: 'prettier,',
-    },
-  ];
+export function prettier(): Array<NamedConfig> {
+  return ns('prettier', [config]);
 }

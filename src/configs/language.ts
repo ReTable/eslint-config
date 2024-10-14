@@ -1,6 +1,7 @@
 import globals from 'globals';
 
-import type { Config, ECMAVersion, Globals, LanguageOptions, SourceType } from '../types';
+import type { ECMAVersion, Globals, LanguageOptions, NamedConfig, SourceType } from '../types';
+import { ns } from './helpers';
 
 export type Options = {
   ecmaVersion?: ECMAVersion;
@@ -14,7 +15,7 @@ export function language({
   globals: userGlobals,
   ecmaVersion,
   sourceType,
-}: Options = {}): Array<Config> {
+}: Options = {}): Array<NamedConfig> {
   const languageOptions: LanguageOptions = {
     ecmaVersion,
 
@@ -33,11 +34,9 @@ export function language({
     languageOptions.globals = all;
   }
 
-  return [
+  return ns('language', [
     {
-      name: 'language',
-
       languageOptions,
     },
-  ];
+  ]);
 }

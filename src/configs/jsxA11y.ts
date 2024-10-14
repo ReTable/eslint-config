@@ -1,7 +1,8 @@
 import plugin from 'eslint-plugin-jsx-a11y';
 
-import { Config } from '../types';
+import { NamedConfig } from '../types';
+import { ns } from './helpers';
 
-export function jsxA11y(): Array<Config> {
-  return [plugin.flatConfigs.strict as Config];
+export function jsxA11y(): Array<NamedConfig> {
+  return ns('jsx-a11y', [{ ...plugin.flatConfigs.strict, name: 'strict' }]);
 }

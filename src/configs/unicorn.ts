@@ -1,16 +1,17 @@
 import plugin from 'eslint-plugin-unicorn';
 
-import { Config } from '../types';
+import { NamedConfig } from '../types';
+import { ns } from './helpers';
 
-export function unicorn(): Array<Config> {
-  return [
+export function unicorn(): Array<NamedConfig> {
+  return ns('unicorn', [
     {
       ...plugin.configs['flat/recommended'],
 
-      name: 'unicorn/recommended',
+      name: 'recommended',
     },
     {
-      name: 'unicorn/rules',
+      name: 'rules',
 
       rules: {
         'unicorn/no-array-reduce': 'off',
@@ -30,5 +31,5 @@ export function unicorn(): Array<Config> {
         ],
       },
     },
-  ];
+  ]);
 }
