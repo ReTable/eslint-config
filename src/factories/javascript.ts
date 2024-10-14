@@ -1,21 +1,15 @@
 import { JavascriptOptions as ImportXOptions, javascript as importX } from '../common/import-x';
-import { language } from '../common/language';
 import { user } from '../common/user';
-import { eslint, prettier, unicorn } from '../configs';
+import { LanguageOptions, eslint, language, prettier, unicorn } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
-import { Config, ECMAVersion, FactoryOptions, Globals, Rules, SourceType } from '../types';
+import { Config, FactoryOptions, Rules } from '../types';
 
-type Options = FactoryOptions & {
-  globals?: Array<Globals>;
+type Options = FactoryOptions &
+  LanguageOptions & {
+    rules?: Rules;
 
-  ecmaVersion?: ECMAVersion;
-
-  sourceType?: SourceType;
-
-  rules?: Rules;
-
-  importXOptions?: ImportXOptions;
-};
+    importXOptions?: ImportXOptions;
+  };
 
 export function javascript({
   ecmaVersion = 'latest',
@@ -26,7 +20,7 @@ export function javascript({
   ...options
 }: Options): Array<Config> {
   const configs: Array<Config> = [
-    language({ ecmaVersion, globals, sourceType }),
+    ...language({ ecmaVersion, globals, sourceType }),
     ...eslint(),
     ...unicorn(),
   ];

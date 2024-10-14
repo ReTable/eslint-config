@@ -1,20 +1,11 @@
 import globals from 'globals';
 
-import type {
-  Config,
-  ECMAVersion,
-  Globals,
-  LanguageOptions,
-  ParserOptions,
-  SourceType,
-} from '../types';
+import type { Config, ECMAVersion, Globals, LanguageOptions, SourceType } from '../types';
 
-type Options = {
+export type Options = {
   ecmaVersion?: ECMAVersion;
 
   globals?: Array<Globals>;
-
-  parserOptions?: ParserOptions;
 
   sourceType?: SourceType;
 };
@@ -22,13 +13,10 @@ type Options = {
 export function language({
   globals: userGlobals,
   ecmaVersion,
-  parserOptions,
   sourceType,
-}: Options): Config {
+}: Options): Array<Config> {
   const languageOptions: LanguageOptions = {
     ecmaVersion,
-
-    parserOptions,
 
     sourceType,
   };
@@ -45,9 +33,11 @@ export function language({
     languageOptions.globals = all;
   }
 
-  return {
-    name: 'language',
+  return [
+    {
+      name: 'language',
 
-    languageOptions,
-  };
+      languageOptions,
+    },
+  ];
 }

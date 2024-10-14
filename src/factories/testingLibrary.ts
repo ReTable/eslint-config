@@ -8,7 +8,7 @@ type Options = FactoryOptions & {
 };
 
 export function testingLibrary({ rules, ...options }: Options): Array<Config> {
-  const configs: Array<Config> = baseConfigs('react');
+  const configs: Array<Config> = baseConfigs({ library: 'react' });
 
   if (areRulesPresented(rules)) {
     configs.push(user(rules));
