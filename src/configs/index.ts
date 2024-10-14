@@ -1,4 +1,5 @@
 export { eslint } from './eslint';
+export { importX } from './importX';
 export { jsxA11y } from './jsxA11y';
 export { language } from './language';
 export { prettier } from './prettier';
@@ -9,7 +10,8 @@ export { typescript } from './typescript';
 export { unicorn } from './unicorn';
 export { vitest } from './vitest';
 
+export type { Options as ImportXOptions } from './importX';
+export type { Options as LanguageOptions } from './language';
 export type { Options as ReactOptions } from './react';
 export type { Options as TestingLibraryOptions } from './testingLibrary';
 export type { Options as TypescriptOptions } from './typescript';
-export type { Options as LanguageOptions } from './language';

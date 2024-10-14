@@ -13,7 +13,7 @@ export type Options = {
   parserOptions?: TypescriptParserOptions;
 };
 
-export function typescript({ useTyped = true, parserOptions }: Options): Array<Config> {
+export function typescript({ useTyped = true, parserOptions }: Options = {}): Array<Config> {
   const { strictTypeChecked, stylisticTypeChecked, strict, stylistic } = plugin.configs;
 
   const configs: Array<Config> = useTyped

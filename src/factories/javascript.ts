@@ -1,6 +1,12 @@
-import { JavascriptOptions as ImportXOptions, javascript as importX } from '../common/import-x';
-import { user } from '../common/user';
-import { LanguageOptions, eslint, language, prettier, unicorn } from '../configs';
+import {
+  ImportXOptions,
+  LanguageOptions,
+  eslint,
+  importX,
+  language,
+  prettier,
+  unicorn,
+} from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
 import { Config, FactoryOptions, Rules } from '../types';
 
@@ -8,7 +14,7 @@ type Options = FactoryOptions &
   LanguageOptions & {
     rules?: Rules;
 
-    importXOptions?: ImportXOptions;
+    importXOptions?: Omit<ImportXOptions, 'typescript'>;
   };
 
 export function javascript({
@@ -30,7 +36,11 @@ export function javascript({
   }
 
   if (areRulesPresented(rules)) {
-    configs.push(user(rules));
+    configs.push({
+      name: 'user-rules',
+
+      rules,
+    });
   }
 
   configs.push(...prettier());

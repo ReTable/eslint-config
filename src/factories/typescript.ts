@@ -1,10 +1,10 @@
-import { TypescriptOptions as ImportXOptions, typescript as importX } from '../common/import-x';
-import { user } from '../common/user';
 import {
+  ImportXOptions,
   LanguageOptions,
   TypescriptOptions,
   typescript as baseConfigs,
   eslint,
+  importX,
   language,
   prettier,
   unicorn,
@@ -43,7 +43,11 @@ export function typescript({
   configs.push(...unicorn());
 
   if (areRulesPresented(rules)) {
-    configs.push(user(rules));
+    configs.push({
+      name: 'user-rules',
+
+      rules,
+    });
   }
 
   configs.push(...prettier());
