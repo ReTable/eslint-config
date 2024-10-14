@@ -1,6 +1,7 @@
 import plugin from 'eslint-plugin-react';
 
-import { Config } from '../types';
+import { Config, NamedConfig } from '../types';
+import { ns } from './helpers';
 
 export type Options = {
   jsxRuntime?: boolean;
@@ -8,12 +9,12 @@ export type Options = {
   version?: string;
 };
 
-export function react({ jsxRuntime = true, version = 'detect' }: Options = {}): Array<Config> {
+export function react({ jsxRuntime = true, version = 'detect' }: Options = {}): Array<NamedConfig> {
   const { flat: configs } = plugin.configs;
 
-  const result: Array<Config> = [
+  const result: Array<NamedConfig> = [
     {
-      ...(configs.recommended as Omit<Config, 'name'>),
+      ...(configs.recommended as Config),
 
       settings: {
         react: {
@@ -21,17 +22,17 @@ export function react({ jsxRuntime = true, version = 'detect' }: Options = {}): 
         },
       },
 
-      name: 'react/recommended',
+      name: 'recommended',
     },
   ];
 
   if (jsxRuntime) {
     result.push({
-      ...(configs['jsx-runtime'] as Omit<Config, 'name'>),
+      ...(configs['jsx-runtime'] as Config),
 
-      name: 'react/jsx-runtime',
+      name: 'jsx-runtime',
     });
   }
 
-  return result;
+  return ns('react', result);
 }

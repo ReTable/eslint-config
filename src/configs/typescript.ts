@@ -1,6 +1,7 @@
 import plugin, { ConfigWithExtends } from 'typescript-eslint';
 
-import { Config } from '../types';
+import { NamedConfig } from '../types';
+import { ns } from './helpers';
 
 type TypescriptParserOptions = Pick<
   NonNullable<NonNullable<ConfigWithExtends['languageOptions']>['parserOptions']>,
@@ -13,16 +14,19 @@ export type Options = {
   parserOptions?: TypescriptParserOptions;
 };
 
-export function typescript({ useTyped = true, parserOptions }: Options = {}): Array<Config> {
+export function typescript({ useTyped = true, parserOptions }: Options = {}): Array<NamedConfig> {
   const { strictTypeChecked, stylisticTypeChecked, strict, stylistic } = plugin.configs;
 
-  const configs: Array<Config> = useTyped
-    ? [...(strictTypeChecked as Array<Config>), ...(stylisticTypeChecked as Array<Config>)]
-    : [...(strict as Array<Config>), ...(stylistic as Array<Config>)];
+  const configs: Array<NamedConfig> = useTyped
+    ? [
+        ...(strictTypeChecked as Array<NamedConfig>),
+        ...(stylisticTypeChecked as Array<NamedConfig>),
+      ]
+    : [...(strict as Array<NamedConfig>), ...(stylistic as Array<NamedConfig>)];
 
   if (parserOptions != null) {
     configs.push({
-      name: 'typescript/parser-options',
+      name: 'parser-options',
 
       languageOptions: {
         parserOptions,
@@ -30,5 +34,14 @@ export function typescript({ useTyped = true, parserOptions }: Options = {}): Ar
     });
   }
 
-  return configs;
+  return ns(
+    'typescript',
+    configs.map((config) => {
+      if (!config.name.startsWith('typescript-eslint/')) {
+        return config;
+      }
+
+      return { ...config, name: config.name.replace(/^(typescript-eslint\/)/, '') };
+    }),
+  );
 }

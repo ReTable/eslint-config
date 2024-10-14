@@ -1,13 +1,14 @@
 import plugin from '@eslint/js';
 
-import { Config } from '../types';
+import { NamedConfig } from '../types';
+import { ns } from './helpers';
 
-export function eslint(): Array<Config> {
-  return [
+export function eslint(): Array<NamedConfig> {
+  return ns('eslint', [
     {
-      name: 'eslint/recommended',
+      name: 'recommended',
 
       rules: plugin.configs.recommended.rules,
     },
-  ];
+  ]);
 }

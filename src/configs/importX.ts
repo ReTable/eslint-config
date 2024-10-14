@@ -1,7 +1,8 @@
 import { TsResolverOptions } from 'eslint-import-resolver-typescript';
 import { flatConfigs } from 'eslint-plugin-import-x';
 
-import { Config, Settings } from '../types';
+import { Config, NamedConfig, Settings } from '../types';
+import { ns } from './helpers';
 
 type ResolverOptions = Pick<TsResolverOptions, 'alwaysTryTypes' | 'project'>;
 
@@ -24,36 +25,36 @@ export function importX({
   extensions,
   externalModuleFolders,
   ignores,
-}: Options = {}): Array<Config> {
-  const result: Array<Config> = [
+}: Options = {}): Array<NamedConfig> {
+  const result: Array<NamedConfig> = [
     {
-      ...(flatConfigs.recommended as Config),
+      ...(flatConfigs.recommended as NamedConfig),
 
-      name: 'import-x/recommended',
+      name: 'recommended',
     },
   ];
 
   if (react) {
     result.push({
-      ...(flatConfigs.react as Omit<Config, 'name'>),
+      ...(flatConfigs.react as Config),
 
-      name: 'import-x/react',
+      name: 'react',
     });
   }
 
   if (electron) {
     result.push({
-      ...(flatConfigs.electron as Omit<Config, 'name'>),
+      ...(flatConfigs.electron as Config),
 
-      name: 'import-x/electron',
+      name: 'electron',
     });
   }
 
   if (typescript) {
-    const config: Config = {
-      ...(flatConfigs.typescript as Omit<Config, 'name'>),
+    const config: NamedConfig = {
+      ...(flatConfigs.typescript as Config),
 
-      name: 'import-x/typescript',
+      name: 'typescript',
     };
 
     if (typeof typescript !== 'boolean') {
@@ -87,11 +88,11 @@ export function importX({
 
   if (Object.keys(settings).length > 0) {
     result.push({
-      name: 'import-x/settings',
+      name: 'settings',
 
       settings,
     });
   }
 
-  return result;
+  return ns('import-x', result);
 }

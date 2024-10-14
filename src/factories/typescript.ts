@@ -10,7 +10,7 @@ import {
   unicorn,
 } from '../configs';
 import { areModulesAvailable, areRulesPresented, buildConfigs } from '../helpers';
-import { Config, FactoryOptions, Rules } from '../types';
+import { FactoryOptions, NamedConfig, Rules } from '../types';
 
 type Options = FactoryOptions &
   LanguageOptions &
@@ -29,8 +29,8 @@ export function typescript({
   parserOptions,
   useTyped,
   ...options
-}: Options): Array<Config> {
-  const configs: Array<Config> = [
+}: Options): Array<NamedConfig> {
+  const configs: Array<NamedConfig> = [
     ...language({ ecmaVersion, globals, sourceType }),
     ...eslint(),
     ...baseConfigs({ useTyped, parserOptions }),

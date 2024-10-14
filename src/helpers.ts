@@ -1,9 +1,9 @@
-import { Config, ECMAVersion, FactoryOptions, Rules, SourceType } from './types';
+import { ECMAVersion, FactoryOptions, NamedConfig, Rules, SourceType } from './types';
 
 export function buildConfigs(
   { name: ns, files, ignores }: FactoryOptions,
-  configs: Array<Config>,
-): Array<Config> {
+  configs: Array<NamedConfig>,
+): Array<NamedConfig> {
   return configs.map(({ name, ...config }) => {
     const fullName: Array<string> = [];
 
@@ -13,7 +13,7 @@ export function buildConfigs(
 
     fullName.push(name != null && name.length > 0 ? name : 'unnamed');
 
-    const final: Config = {
+    const final: NamedConfig = {
       ...config,
 
       name: fullName.join('/'),
