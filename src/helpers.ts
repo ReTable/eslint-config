@@ -16,9 +16,9 @@ function ns(namespace: string, configs: Config[]): NamedConfig[] {
 }
 
 export function defineConfig(namespace: string, configs: Config[]): NamedConfig[] {
-  return ns(`config:${namespace}`, configs);
+  return ns(`config-${namespace}`, configs);
 }
 
 export function definePreset(namespace: string, configs: Array<Config | Config[]>): NamedConfig[] {
-  return ns(`preset:${namespace}`, configs.flat());
+  return ns(`preset-${namespace}`, configs.flat());
 }
