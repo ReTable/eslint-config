@@ -54,6 +54,7 @@
     "eslint-plugin-testing-library": "^6.3.0",
     "eslint-plugin-unicorn": "^56.0.0",
     "globals": "^15.11.0",
+    "kebab-case": "^2.0.1",
     "typescript-eslint": "^8.8.1"
   },
   "peerDependencies": {
