@@ -9,7 +9,7 @@ export type Options = {
   library: 'dom' | 'react';
 };
 
-export function testingLibrary({ library }: Options): Array<NamedConfig> {
+export function testingLibrary({ library }: Options): NamedConfig[] {
   return defineConfig('testing-library', [
     {
       name: library,

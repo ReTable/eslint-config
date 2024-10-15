@@ -3,7 +3,7 @@ import plugin from 'eslint-plugin-unicorn';
 import { defineConfig } from '../helpers';
 import { NamedConfig } from '../types';
 
-export function unicorn(): Array<NamedConfig> {
+export function unicorn(): NamedConfig[] {
   return defineConfig('unicorn', [
     {
       ...plugin.configs['flat/recommended'],

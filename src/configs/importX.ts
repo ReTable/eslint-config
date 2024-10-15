@@ -11,10 +11,10 @@ export type Options = {
   electron?: boolean;
   typescript?: boolean | ResolverOptions;
 
-  coreModules?: Array<string>;
-  extensions?: Array<string>;
-  externalModuleFolders?: Array<string>;
-  ignores?: Array<string>;
+  coreModules?: string[];
+  extensions?: string[];
+  externalModuleFolders?: string[];
+  ignores?: string[];
 };
 
 export function importX({
@@ -25,8 +25,8 @@ export function importX({
   extensions,
   externalModuleFolders,
   ignores,
-}: Options = {}): Array<NamedConfig> {
-  const result: Array<NamedConfig> = [
+}: Options = {}): NamedConfig[] {
+  const result: NamedConfig[] = [
     {
       ...(flatConfigs.recommended as NamedConfig),
 
@@ -93,6 +93,36 @@ export function importX({
       settings,
     });
   }
+
+  result.push({
+    name: 'rules',
+
+    rules: {
+      'import-x/extensions': [
+        'error',
+        'ignorePackages',
+        {
+          js: 'never',
+          jsx: 'never',
+          ts: 'never',
+          tsx: 'never',
+        },
+      ],
+      'import-x/first': ['error', 'absolute-first'],
+      'import-x/named': 'off',
+      'import-x/newline-after-import': 'error',
+      'import-x/no-absolute-path': 'error',
+      'import-x/no-cycle': 'off',
+      'import-x/no-duplicates': 'error',
+      'import-x/no-self-import': 'error',
+      'import-x/order': [
+        'error',
+        {
+          groups: ['builtin', 'external', 'internal'],
+        },
+      ],
+    },
+  });
 
   return defineConfig('import-x', result);
 }

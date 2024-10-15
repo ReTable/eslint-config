@@ -10,8 +10,12 @@ type Options = {
   typescript?: TypescriptOptions;
 };
 
-export function typescript({ importX, language, typescript }: Options = {}): Array<NamedConfig> {
-  const result = [configs.eslint(), configs.typescript(typescript), configs.unicorn()];
+export function typescript({
+  importX,
+  language,
+  typescript: typescriptOptions,
+}: Options = {}): NamedConfig[] {
+  const result = [configs.eslint(), configs.typescript(typescriptOptions), configs.unicorn()];
 
   if (areModulesAvailable(language?.ecmaVersion, language?.sourceType)) {
     const options = { ...importX };
