@@ -8,7 +8,7 @@ type Options = {
   language?: LanguageOptions;
 };
 
-export function javascript({ importX, language }: Options = {}): Array<NamedConfig> {
+export function javascript({ importX, language }: Options = {}): NamedConfig[] {
   const result = [configs.eslint(), configs.unicorn()];
 
   if (areModulesAvailable(language?.ecmaVersion, language?.sourceType)) {

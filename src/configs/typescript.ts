@@ -14,10 +14,10 @@ export type Options = {
   parserOptions?: TypescriptParserOptions;
 };
 
-function cleanup(configs: Array<NamedConfig>): Array<NamedConfig> {
+function cleanup(configs: NamedConfig[]): NamedConfig[] {
   const seen = new Set<string>();
 
-  const result: Array<NamedConfig> = [];
+  const result: NamedConfig[] = [];
 
   for (const config of configs) {
     if (seen.has(config.name)) {
@@ -38,15 +38,12 @@ function cleanup(configs: Array<NamedConfig>): Array<NamedConfig> {
   return result;
 }
 
-export function typescript({ useTyped = true, parserOptions }: Options = {}): Array<NamedConfig> {
+export function typescript({ useTyped = true, parserOptions }: Options = {}): NamedConfig[] {
   const { strictTypeChecked, stylisticTypeChecked, strict, stylistic } = plugin.configs;
 
-  const configs: Array<NamedConfig> = useTyped
-    ? [
-        ...(strictTypeChecked as Array<NamedConfig>),
-        ...(stylisticTypeChecked as Array<NamedConfig>),
-      ]
-    : [...(strict as Array<NamedConfig>), ...(stylistic as Array<NamedConfig>)];
+  const configs: NamedConfig[] = useTyped
+    ? [...(strictTypeChecked as NamedConfig[]), ...(stylisticTypeChecked as NamedConfig[])]
+    : [...(strict as NamedConfig[]), ...(stylistic as NamedConfig[])];
 
   if (parserOptions != null) {
     configs.push({
@@ -57,6 +54,86 @@ export function typescript({ useTyped = true, parserOptions }: Options = {}): Ar
       },
     });
   }
+
+  configs.push({
+    name: 'rules',
+
+    rules: {
+      '@typescript-eslint/array-type': [
+        'error',
+        {
+          default: 'array-simple',
+          readonly: 'array-simple',
+        },
+      ],
+      '@typescript-eslint/consistent-type-assertions': [
+        'error',
+        {
+          assertionStyle: 'as',
+          objectLiteralTypeAssertions: 'allow',
+        },
+      ],
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/consistent-type-exports': [
+        'error',
+        {
+          fixMixedExportsWithInlineTypeSpecifier: true,
+        },
+      ],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'no-type-imports',
+          disallowTypeAnnotations: true,
+        },
+      ],
+      '@typescript-eslint/default-param-last': 'error',
+      '@typescript-eslint/explicit-member-accessibility': [
+        'error',
+        {
+          accessibility: 'explicit',
+        },
+      ],
+      '@typescript-eslint/explicit-module-boundary-types': [
+        'error',
+        {
+          allowArgumentsExplicitlyTypedAsAny: false,
+          allowDirectConstAssertionInArrowFunctions: true,
+          allowHigherOrderFunctions: true,
+          allowTypedFunctionExpressions: true,
+        },
+      ],
+      '@typescript-eslint/init-declarations': 'error',
+      '@typescript-eslint/member-ordering': 'error',
+      '@typescript-eslint/method-signature-style': ['error', 'property'],
+      '@typescript-eslint/no-dupe-class-members': 'error',
+      '@typescript-eslint/no-invalid-this': 'error',
+      '@typescript-eslint/no-redeclare': 'error',
+      '@typescript-eslint/no-shadow': [
+        'error',
+        {
+          builtinGlobals: false,
+        },
+      ],
+      '@typescript-eslint/no-unnecessary-qualifier': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      '@typescript-eslint/no-use-before-define': 'error',
+      '@typescript-eslint/prefer-readonly': 'error',
+      '@typescript-eslint/promise-function-async': 'error',
+      '@typescript-eslint/switch-exhaustiveness-check': 'error',
+
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+      '@typescript-eslint/restrict-template-expressions': 'off',
+      '@typescript-eslint/strict-boolean-expressions': 'off',
+    },
+  });
 
   return defineConfig('typescript', cleanup(configs));
 }

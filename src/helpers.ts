@@ -7,7 +7,7 @@ export function areModulesAvailable(ecmaVersion?: ECMAVersion, sourceType?: Sour
   );
 }
 
-function ns(namespace: string, configs: Array<Config>): Array<NamedConfig> {
+function ns(namespace: string, configs: Config[]): NamedConfig[] {
   return configs.map(({ name, ...config }) => ({
     ...config,
 
@@ -15,13 +15,10 @@ function ns(namespace: string, configs: Array<Config>): Array<NamedConfig> {
   }));
 }
 
-export function defineConfig(namespace: string, configs: Array<Config>): Array<NamedConfig> {
+export function defineConfig(namespace: string, configs: Config[]): NamedConfig[] {
   return ns(`config:${namespace}`, configs);
 }
 
-export function definePreset(
-  namespace: string,
-  configs: Array<Config | Array<Config>>,
-): Array<NamedConfig> {
+export function definePreset(namespace: string, configs: Array<Config | Config[]>): NamedConfig[] {
   return ns(`preset:${namespace}`, configs.flat());
 }
