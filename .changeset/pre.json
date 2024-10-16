@@ -4,5 +4,7 @@
   "initialVersions": {
     "@tabula/eslint-config": "0.1.5"
   },
-  "changesets": []
+  "changesets": [
+    "two-moles-reply"
+  ]
 }
