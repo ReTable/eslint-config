@@ -1,3 +1,3 @@
 export { configs } from './configs';
 export { presets } from './presets';
-export * from './utilities';
+export { defineConfig } from './defineConfig';
