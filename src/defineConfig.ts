@@ -1,6 +1,6 @@
 import toKebab from 'kebab-case';
 
-import { Config } from '../types';
+import { Config } from './types';
 
 type Configs = {
   files: Config['files'];
