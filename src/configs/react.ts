@@ -12,6 +12,10 @@ export type Options = {
 export function react({ jsxRuntime = true, version = 'detect' }: Options = {}): NamedConfig[] {
   const { flat: configs } = plugin.configs;
 
+  if (configs == null) {
+    throw new Error("There no flat configs in the 'eslint-plugin-react'");
+  }
+
   const result: NamedConfig[] = [
     {
       ...(configs.recommended as Config),
