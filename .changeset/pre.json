@@ -4,5 +4,8 @@
   "initialVersions": {
     "@tabula/eslint-config": "0.1.5"
   },
-  "changesets": []
+  "changesets": [
+    "grumpy-hairs-run",
+    "two-moles-reply"
+  ]
 }
