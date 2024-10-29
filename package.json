@@ -34,7 +34,8 @@
   ],
   "scripts": {
     "build": "forge",
-    "build:watch": "forge --watch"
+    "build:watch": "forge --watch",
+    "release": "changeset publish"
   },
   "packageManager": "pnpm@9.12.3",
   "engines": {
