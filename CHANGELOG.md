@@ -1,5 +1,13 @@
 # @tabula/eslint-config
 
+## 1.0.0-next.0
+
+### Major Changes
+
+- [#5](https://github.com/ReTable/eslint-config/pull/5) [`eff2ad9`](https://github.com/ReTable/eslint-config/commit/eff2ad91c40104916ac4917813e97231e336d0b8) Thanks [@demiazz](https://github.com/demiazz)! - add `defineConfig` to define complex configs
+
+- [`45e6677`](https://github.com/ReTable/eslint-config/commit/45e6677fc50d61434ed2bc74f0af6717aeb6cc29) Thanks [@demiazz](https://github.com/demiazz)! - dropped support of ESLint 8 in favor of ESLint 9
+
 ## 0.1.5
 
 ### Patch Changes
