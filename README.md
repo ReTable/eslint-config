@@ -37,50 +37,36 @@ You can use [npm](https://npmjs.com) or [yarn](https://yarnpkg.com) too.
 
 ## Usage
 
-The package provides `browser` and `node` presets. Add an `.eslintrc.json` configuration file to the root of your
-project for browser:
+The package provides utilities to build flat config, also configs and presets, which can be used for build your own
+configuration.
 
-```json
-{
-  "extends": "@tabula/eslint-config/browser",
+The `defineConfig` utility accepts record with config definitions. Each definition is a ESLint flat config itself, or
+object with `files`, `ignores` and `configs` fields.
 
-  "parserOptions": {
-    "project": ["tsconfig.json"]
+It's function build flat config with defined names to improve debug and readability.
+
+```js
+import { defineConfig } from '@tabula/eslint-config';
+
+export default defineConfig({
+  typescript: {
+    files: ['{src,stories}/**/*.{ts,tsx}'],
+    ignores: ['src/**/*.js'],
+
+    configs: presets.typescript(),
+  },
+
+  stories: {
+    files: ['stories/**/*.{ts,tsx}'],
+
+    rules: {
+      'react/no-multi-comp': 'off',
+    },
   }
-}
+});
 ```
 
-or for browser tests:
-
-```json
-{
-  "extends": "@tabula/eslint-config/browser-tests",
-
-  "parserOptions": {
-    "project": ["tsconfig.json"]
-  }
-}
-```
-
-or for Node.js:
-
-```json
-{
-  "extends": "@tabula/eslint-config/node",
-
-  "parserOptions": {
-    "project": ["tsconfig.json"]
-  }
-}
-```
-
-### Parser Options
-
-Pay attention to the `parserOptions.project` option.
-
-We use rules which require type checking. The parser must be configured properly for them.
-
-See more information about `parserOptions.project` [here](https://github.com/typescript-eslint/typescript-eslint/tree/main/packages/parser#parseroptionsproject).
+Also package exports `configs` and `presets` objects, which provide of single configs or configs list.
 
 ## License
 
