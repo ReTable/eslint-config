@@ -1,5 +1,11 @@
 # @tabula/eslint-config
 
+## 1.0.0-next.2
+
+### Patch Changes
+
+- [#8](https://github.com/ReTable/eslint-config/pull/8) [`5797471`](https://github.com/ReTable/eslint-config/commit/57974713f96e1c9602ad40c5340ae8ceec5945b3) Thanks [@demiazz](https://github.com/demiazz)! - rollback `eslint` to non broken `9.13.0`
+
 ## 1.0.0-next.1
 
 ### Patch Changes
