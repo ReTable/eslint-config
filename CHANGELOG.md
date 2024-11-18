@@ -1,5 +1,11 @@
 # @tabula/eslint-config
 
+## 1.0.0-next.1
+
+### Patch Changes
+
+- [#6](https://github.com/ReTable/eslint-config/pull/6) [`3730082`](https://github.com/ReTable/eslint-config/commit/3730082305cf33c3f71b5cf2d3d929adf4f24f43) Thanks [@demiazz](https://github.com/demiazz)! - update dependencies and `README.md`
+
 ## 1.0.0-next.0
 
 ### Major Changes
