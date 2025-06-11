@@ -1,10 +1,10 @@
-import { TsResolverOptions } from 'eslint-import-resolver-typescript';
+import { TypeScriptResolverOptions } from 'eslint-import-resolver-typescript';
 import { flatConfigs } from 'eslint-plugin-import-x';
 
 import { defineConfig } from '../helpers';
 import { Config, NamedConfig, Settings } from '../types';
 
-type ResolverOptions = Pick<TsResolverOptions, 'alwaysTryTypes' | 'project'>;
+type ResolverOptions = Pick<TypeScriptResolverOptions, 'alwaysTryTypes' | 'project'>;
 
 export type Options = {
   react?: boolean;
