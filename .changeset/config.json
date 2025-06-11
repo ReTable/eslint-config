@@ -9,5 +9,6 @@
   ],
   "access": "public",
   "baseBranch": "main",
-  "commit": false
+  "commit": false,
+  "prettier": false
 }
