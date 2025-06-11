@@ -1,5 +1,19 @@
 # @tabula/eslint-config
 
+## 1.1.0
+### Minor Changes
+
+
+
+- [#11](https://github.com/ReTable/eslint-config/pull/11) [`020ac81`](https://github.com/ReTable/eslint-config/commit/020ac81201f8723526473333670e3c618f9ada75) Thanks [@amikhaylov-retable](https://github.com/amikhaylov-retable)! - Update eslint dependencies
+
+
+### Patch Changes
+
+
+
+- [#12](https://github.com/ReTable/eslint-config/pull/12) [`c9e0492`](https://github.com/ReTable/eslint-config/commit/c9e0492c84d1a98c3f1588efea90eecb123c57d6) Thanks [@amikhaylov-retable](https://github.com/amikhaylov-retable)! - Fix changeset
+
 ## 1.0.0
 
 ### Major Changes
