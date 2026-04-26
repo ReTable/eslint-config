@@ -1,5 +1,12 @@
 # @tabula/eslint-config
 
+## 1.1.1
+### Patch Changes
+
+
+
+- Upgrade the dependency stack for ESLint 10 and TypeScript 6 support.
+
 ## 1.1.0
 ### Minor Changes
 

@@ -1,5 +1,9 @@
 {
   "extends": "@tabula/typescript-config/tsconfig.node.json",
 
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  },
+
   "include": ["src", "types"]
 }

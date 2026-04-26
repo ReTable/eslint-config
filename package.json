@@ -1,11 +1,11 @@
 {
   "name": "@tabula/eslint-config",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Configuration for the ESLint",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./typings/index.d.ts",
+      "types": "./typings/src/index.d.ts",
       "import": "./lib/index.js",
       "default": "./lib/index.js"
     },
@@ -39,49 +39,48 @@
   },
   "packageManager": "pnpm@10.6.4",
   "engines": {
-    "node": "^22",
+    "node": "^24",
     "pnpm": "^10"
   },
   "dependencies": {
-    "@eslint/compat": "^1.2.9",
-    "@eslint/js": "^9.28.0",
-    "@vitest/eslint-plugin": "^1.2.2",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-import-resolver-typescript": "^4.4.3",
-    "eslint-plugin-import-x": "^4.15.1",
+    "@eslint/compat": "^2.0.5",
+    "@eslint/js": "^10.0.1",
+    "@vitest/eslint-plugin": "^1.6.16",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-testing-library": "^7.5.1",
-    "eslint-plugin-unicorn": "^59.0.1",
-    "globals": "^16.2.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-testing-library": "^7.16.2",
+    "eslint-plugin-unicorn": "^64.0.0",
+    "globals": "^17.5.0",
     "kebab-case": "^2.0.2",
-    "typescript-eslint": "^8.34.0"
+    "typescript-eslint": "^8.59.0"
   },
   "peerDependencies": {
-    "eslint": "9.28.0",
-    "typescript": "^5.8.3"
+    "eslint": "^10.0.0",
+    "typescript": "^5.8.3 || >=6.0.0 <6.1.0"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.4",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^20.5.2",
+    "@commitlint/config-conventional": "^20.5.0",
     "@tabula/forge": "^4.0.2",
     "@tabula/prettier-config": "^0.1.7",
     "@tabula/typescript-config": "^0.3.3",
     "@types/eslint-config-prettier": "^6.11.3",
-    "@types/eslint-plugin-jsx-a11y": "^6.10.0",
-    "@types/eslint__js": "^8.42.3",
-    "eslint": "9.28.0",
-    "lefthook": "^1.11.13",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.3"
+    "eslint": "10.2.1",
+    "lefthook": "^2.1.6",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3"
   },
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {
-        "eslint": "9"
+        "eslint": "10",
+        "typescript": "6"
       }
     }
   }
