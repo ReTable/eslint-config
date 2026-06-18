@@ -14,8 +14,7 @@ We use recommended rules from the following packages:
 
 We add support of React for browser:
 
-- [react](https://github.com/jsx-eslint/eslint-plugin-react)
-- [react-hook](https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)
+- [@eslint-react/eslint-plugin](https://github.com/Rel1cx/eslint-react)
 - [jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
 
 We add support of testing tools:
@@ -60,7 +59,7 @@ export default defineConfig({
     files: ['stories/**/*.{ts,tsx}'],
 
     rules: {
-      'react/no-multi-comp': 'off',
+      '@eslint-react/no-nested-component-definitions': 'off',
     },
   }
 });
